@@ -15,6 +15,8 @@ A simple web application that allows users to view and review their favorite mov
 **Stretch Goals**
 * As a user, I want to be able to share my dahsboard.
 * As a developer, I want to implement a brief survey to collect data from the user to show content suggestions.
+* As a developer, I want to devlop a desktop view.
+* As a developer, I want to develop using PWA.
 
 ## Built With
 * React
