@@ -18,6 +18,12 @@ A simple web application that allows users to view and review their favorite mov
 * As a developer, I want to devlop a desktop view.
 * As a developer, I want to develop using PWA.
 
+## WireFrame
+* https://whimsical.com/BDvnrAJniRByMuPu3zW1Hj
+
+## Schema Mockup
+* https://drive.google.com/file/d/1sWM6rNv4QEmxlSrUm2qSazijcHofUx0e/view
+
 ## Built With
 * React
 * JavaScript
