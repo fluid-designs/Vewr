@@ -1,9 +1,31 @@
 import React, { Fragment, Component } from "react";
 
-export default function App() {
-  return (
-    <Fragment>
-      <div className="App">We here now!!</div>
-    </Fragment>
-  );
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+import Navbar from "./navbar/navbar.js";
+import Login from "./login/login.js";
+import Dashboard from "./dashboard/dashboard.js";
+import AboutUs from "./about-us/about-us.js";
+
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {};
+  }
+
+  render() {
+    return (
+      <Router>
+        <Fragment>
+          <Navbar />
+          <Switch>
+            <Route exact path="/" component={Login} />
+            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/about-us" component={AboutUs} />
+          </Switch>
+        </Fragment>
+      </Router>
+    );
+  }
 }
