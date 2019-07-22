@@ -26,6 +26,7 @@ A simple web application that allows users to view and review their favorite mov
 * PostgreSQL
 * Heroku 
 * Whimsical (for wireframing)
+* SASS
 
 ## Authors
 * **Melfi Perez** 
