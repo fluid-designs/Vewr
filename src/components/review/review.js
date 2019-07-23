@@ -44,7 +44,36 @@ export default class Review extends Component{
     // TODO Send post request to server which will save review into DB
     // Send an object which includes the user id, review, movie id, rating & recommend
     // Send movie details data movie_id, title, overview, released_on, image_url 
+    // Get user ID from local storage
+    const data = {
+      user_id: localStorage.getItem('userId'), 
+      movie: {
+        movie_id: this.state.movie_id,
+        title: this.state.movie.title, 
+        overview: this.state.movie.overview, 
+        released_on: this.state.movie.released_on, 
+        image_url: this.state.movie.poster_path
+      },
+      review: {
+        text: this.state.review,
+        rating: 'rating',
+        recommended: '0'
+      }
+    }
+
+    superagent
+      .post('/review')
+      .set('Content-Type', 'application/json')
+      .send(data)
+      .then(result =>{
+        console.log(result.body);
+      })
+      .catch(err => {
+        console.error(err)
+      })
+
     //this.props.history.push("/dashboard");
+    
   }
 
   render(){
