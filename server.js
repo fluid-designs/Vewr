@@ -42,7 +42,7 @@ function Movies(movie) {
 }
 
 function getMovieAPIResults(request, response) {
-  const movieTitle = 'Avengers';
+  const movieTitle = request.query.data;
   const url = `https://api.themoviedb.org/3/search/movie?api_key=${
     process.env.MOVIE_API_KEY
   }&query=${movieTitle}`;
