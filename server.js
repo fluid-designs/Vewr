@@ -39,24 +39,17 @@ function Movies(movie) {
   this.synopsis = movie.overview;
   this.released_on = movie.released_date;
   this.image_url =
-    `https:// image.tmdb.org/t/p/w500${movie.poster_path}` || "Image";
+    `https://image.tmdb.org/t/p/w500${movie.poster_path}` || "Image";
 }
 
 function getMovieAPIResults(request, response) {
   const url = urlBuilder(request);
-  console.log(request.query);
-  console.log(url);
 
   superagent
     .get(url)
-    .then(result => {
-      const movies = result.body.results.map(movieData => {
-        const movie = new Movies(movieData);
-        // movie.save(request.query.data.id);
-
-        return movie;
-      });
-      response.send(movies);
+    .then(res => {
+      let resultData = dataBuilder(res);
+      response.send(resultData);
     })
     .catch(error => handleError(error, response));
 }
@@ -77,8 +70,19 @@ function urlBuilder(request) {
       // TODO: Is this default correct?
       url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&query=${searchTarget}`;
   }
-
   return url;
+}
+
+// Function to determine return proper data object from API.
+function dataBuilder(res) {
+  if (Array.isArray(res.body.results)) {
+    return res.body.results.map(movieData => {
+      const movie = new Movies(movieData);
+      return movie;
+    });
+  } else {
+    return res.body;
+  }
 }
 
 // TODO: Implement lookup from DB
