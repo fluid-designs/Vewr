@@ -50,13 +50,13 @@ export default class Review extends Component{
       movie: {
         movie_id: this.state.movie_id,
         title: this.state.movie.title, 
-        overview: this.state.movie.overview, 
+        overview: this.state.movie.synopsis, 
         released_on: this.state.movie.released_on, 
-        image_url: this.state.movie.poster_path
+        image_url: this.state.movie.image_url
       },
       review: {
         text: this.state.review,
-        rating: 'rating',
+        rating: 1.4,
         recommended: '0'
       }
     }
@@ -82,8 +82,8 @@ export default class Review extends Component{
         <div id="Review" className="component-container">
         <section className="movie-info">
           <h1>{this.state.movie.title}</h1>
-          <p>{this.state.movie.overview}</p>
-          <img src={this.state.movie.poster_path} alt={this.state.movie.title}></img>
+          <p>{this.state.movie.synopsis}</p>
+          <img src={this.state.movie.image_url} alt={this.state.movie.title}></img>
         </section>
 
         {/* TODO: Check if review already exists for this movie by the current user  */}
