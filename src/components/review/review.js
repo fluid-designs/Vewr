@@ -50,7 +50,7 @@ export default class Review extends Component{
       movie: {
         movie_id: this.state.movie_id,
         title: this.state.movie.title, 
-        overview: this.state.movie.synopsis, 
+        synopsis: this.state.movie.synopsis, 
         released_on: this.state.movie.released_on, 
         image_url: this.state.movie.image_url
       },
