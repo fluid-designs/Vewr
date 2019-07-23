@@ -18,6 +18,9 @@ const client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
 client.on('error', err => console.error(err));
 
+// Global variable declaration.
+const MOVIE_API_KEY = process.env.MOVIE_API_KEY;
+
 // API Routes
 app.get('/search', getMovieAPIResults);
 app.get('/movies', getMovieAPIResults);
@@ -61,14 +64,13 @@ function urlBuilder(request) {
   let url = '';
   switch (searchType) {
     case 'movies':
-      url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&query=${searchTarget}`;
+      url = `https://api.themoviedb.org/3/search/movie?api_key=${MOVIE_API_KEY}&query=${searchTarget}`;
       break;
     case 'search':
-      url = `https://api.themoviedb.org/3/movie/${searchTarget}?api_key=${process.env.MOVIE_API_KEY}&language=en-US`;
+      url = `https://api.themoviedb.org/3/movie/${searchTarget}?api_key=${MOVIE_API_KEY}&language=en-US`;
       break;
     default:
-      // TODO: Is this default correct?
-      url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&query=${searchTarget}`;
+      url = `https://api.themoviedb.org/3/search/movie?api_key=${MOVIE_API_KEY}&query=${searchTarget}`;
   }
   return url;
 }
