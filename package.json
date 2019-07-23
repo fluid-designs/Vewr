@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "node-sass": "^4.12.0",
@@ -33,5 +34,19 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "A simple web application that allows users to view and review their favorite movies & TV Shows.",
+  "main": "server.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fluid-designs/Vewr.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fluid-designs/Vewr/issues"
+  },
+  "homepage": "https://github.com/fluid-designs/Vewr#readme",
+  "proxy": "http://localhost:5000"
 }

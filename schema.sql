@@ -25,8 +25,8 @@ CREATE TABLE movies (
   movie_id INTEGER,
   title VARCHAR(255),
   overview TEXT,
-  released_date VARCHAR(255),
-  poster_path TEXT,
+  released_on VARCHAR(255),
+  image_url TEXT,
   user_id INTEGER NOT NULL,
   created_at DATE,
   FOREIGN KEY (user_id) REFERENCES users (id)
