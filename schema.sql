@@ -12,7 +12,7 @@ CREATE TABLE movies (
   id SERIAL PRIMARY KEY,
   movie_id INTEGER,
   title VARCHAR(255),
-  overview TEXT,
+  synopsis TEXT,
   released_on VARCHAR(255),
   image_url TEXT
 );
@@ -22,7 +22,7 @@ CREATE TABLE reviews (
     review VARCHAR(1000),
     rating FLOAT,
     recommended BIT,
-    created_at DATE,
+    created_on DATE,
     user_id INTEGER NOT NULL,
     movie_id INTEGER NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users (id),
