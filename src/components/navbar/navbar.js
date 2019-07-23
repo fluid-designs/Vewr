@@ -7,7 +7,7 @@ export default function Navbar() {
     <Fragment>
       <nav className="navbar">
         <Link to="/">
-          <h1>VEWR</h1>
+          <h1 id="title-logo">VEWR</h1>
         </Link>
 
         <ul>
