@@ -9,6 +9,11 @@ export default class Login extends Component {
     };
   }
 
+  saveUserId = (id) => {
+    localStorage.setItem('userId', JSON.stringify(id))
+    // TODO save the ID from the backend to LS
+  }
+
   handleChange = (event) => {
     this.setState({
       username: event.target.value
@@ -17,16 +22,15 @@ export default class Login extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-
     console.log("Username: ", this.state.username);
-
+    this.saveUserId(1);
     this.props.history.push("/dashboard");
   }
 
   render() {
     return (
       <Fragment>
-        <div className="login">
+        <div id="login" className="component-container">
           <h1>Login</h1>
 
           <form onSubmit={this.handleSubmit}>
