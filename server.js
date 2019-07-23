@@ -60,21 +60,15 @@ function urlBuilder(request) {
   const searchType = request.query.url;
   let url = '';
   switch (searchType) {
-  case 'movies':
-    url = `https://api.themoviedb.org/3/search/movie?api_key=${
-      process.env.MOVIE_API_KEY
-    }&query=${searchTarget}`;
-    break;
-  case 'search':
-    url = `https://api.themoviedb.org/3/movie/${searchTarget}?api_key=${
-      process.env.MOVIE_API_KEY
-    }&language=en-US`;
-    break;
-  default:
-    // TODO: Is this default correct?
-    url = `https://api.themoviedb.org/3/search/movie?api_key=${
-      process.env.MOVIE_API_KEY
-    }&query=${searchTarget}`;
+    case 'movies':
+      url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&query=${searchTarget}`;
+      break;
+    case 'search':
+      url = `https://api.themoviedb.org/3/movie/${searchTarget}?api_key=${process.env.MOVIE_API_KEY}&language=en-US`;
+      break;
+    default:
+      // TODO: Is this default correct?
+      url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&query=${searchTarget}`;
   }
   return url;
 }
@@ -82,12 +76,9 @@ function urlBuilder(request) {
 // Function to determine return proper data object from API.
 function dataBuilder(res) {
   if (Array.isArray(res.body.results)) {
-    return res.body.results.map(movieData => {
-      const movie = new Movies(movieData);
-      return movie;
-    });
+    return res.body.results.map(movieData => new Movies(movieData));
   } else {
-    return res.body;
+    return new Movies(res.body);
   }
 }
 
