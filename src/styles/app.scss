@@ -7,6 +7,7 @@
 @import "layout";
 @import "module";
 @import "./components/review";
+@import "./components/login";
 
 body {
   color: aqua;
@@ -46,17 +47,3 @@ nav > ul > a {
   // font-family: "Gugi", cursive;
 }
 
-.login {
-  margin-top: 50px;
-  text-align: center;
-
-  h1 {
-    margin-bottom: 20px;
-    font-size: 30px;
-  }
-
-  button {
-    margin-top: 20px;
-    background: blue;
-  }
-}
