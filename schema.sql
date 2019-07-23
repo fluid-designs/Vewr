@@ -14,14 +14,12 @@ CREATE TABLE movies (
   title VARCHAR(255),
   overview TEXT,
   released_on VARCHAR(255),
-  image_url TEXT,
-  user_id INTEGER NOT NULL,
-  created_at DATE,
-  FOREIGN KEY (user_id) REFERENCES users (id)
+  image_url TEXT
 );
 
 CREATE TABLE reviews ( 
     id SERIAL PRIMARY KEY,
+    review VARCHAR(1000),
     rating FLOAT,
     recommended BIT,
     created_at DATE,

@@ -25,7 +25,7 @@ export default class App extends Component {
             <Route exact path="/" component={Login} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/search/:query" component={Search} />
-            <Route path="/review" component={Review} />
+            <Route path="/review/:movie_id" component={Review} />
             <Route path="/about-us" component={AboutUs} />
           </Switch>
         </Fragment>
