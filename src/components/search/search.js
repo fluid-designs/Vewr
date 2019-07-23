@@ -22,9 +22,9 @@ export default class Search extends Component{
         data: this.state.query
       })
       .then(result => {
-        console.log('search ', result.body.results);
+        console.log('search ', result.body);
         this.setState({
-          movies: result.body.results
+          movies: result.body
         })
       })
       .catch(err => {
