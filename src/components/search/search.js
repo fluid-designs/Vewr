@@ -1,4 +1,5 @@
 import React, { Fragment, Component } from "react";
+import {Link} from "react-router-dom";
 import superagent from "superagent";
 
 require('dotenv').config()
@@ -19,9 +20,11 @@ export default class Search extends Component{
     superagent
       .get('/movies')
       .query({
-        data: this.state.query
+        data: this.state.query, 
+        url: 'movies'
       })
       .then(result => {
+        //console.log(result.body);
          this.setState({
           movies: result.body
         })
@@ -38,9 +41,11 @@ export default class Search extends Component{
           <h1>Search results</h1>
           <ul>
             {this.state.movies.map(movie => {
-              return <li key={movie.title}>
-              <h3>{movie.title}</h3>
-              <p>{movie.overview}</p>
+              return <li key={movie.movie_id}>
+              <Link to={`/review/${movie.movie_id}`}>
+                <h3>{movie.title}</h3>
+              </Link>
+              <p>{movie.synopsis}</p>
               </li>
             })}
           </ul>
