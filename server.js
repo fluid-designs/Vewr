@@ -1,52 +1,51 @@
-'use-strict';
+"use-strict";
 
-//Dependencies
-const express = require('express');
-const superagent = require('superagent');
-const pg = require('pg');
-const cors = require('cors');
+// Dependencies
+const express = require("express");
+const superagent = require("superagent");
+const pg = require("pg");
+const cors = require("cors");
 
-require('dotenv').config();
+const MOVIE_API_KEY = process.env.MOVIE_API_KEY;
 
-//Application setup
+require("dotenv").config();
+
+// Application setup
 const app = express();
 app.use(cors());
 const PORT = process.env.PORT || 5000;
 
-//DB setup
+// DB setup
 const client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
-client.on('error', err => console.error(err));
+client.on("error", err => console.error(err));
 
-//API Routes
-// app.get('/search', getSearchResults);
-app.get('/movies', getMovieAPIResults);
+// API Routes
+//  app.get('/search', getSearchResults);
+app.get("/movies", getMovieAPIResults);
 
-//Ensures server is listening for requests
+// Ensures server is listening for requests
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
-//Error Handling
+// Error Handling
 function handleError(err, result) {
   console.error(err);
-  if (result) result.status(500).send('Something went wrong internal error');
+  if (result) result.status(500).send("Something went wrong internal error");
 }
 
-//Movies Constructor
+// Movies Constructor
 function Movies(movie) {
-  this.tableName = 'movies';
+  this.tableName = "movies";
   this.movie_id = movie.id;
   this.title = movie.original_title;
   this.synopsis = movie.overview;
   this.released_on = movie.released_date;
   this.image_url =
-    `https://image.tmdb.org/t/p/w500${movie.poster_path}` || 'Image';
+    `https:// image.tmdb.org/t/p/w500${movie.poster_path}` || "Image";
 }
 
 function getMovieAPIResults(request, response) {
-  const movieTitle = request.query.data;
-  const url = `https://api.themoviedb.org/3/search/movie?api_key=${
-    process.env.MOVIE_API_KEY
-  }&query=${movieTitle}`;
+  const url = urlBuilder(request);
 
   superagent
     .get(url)
@@ -62,73 +61,93 @@ function getMovieAPIResults(request, response) {
     .catch(error => handleError(error, response));
 }
 
-//TODO: Implement lookup from DB
-//Movies.lookup = lookup;
+// Function to determine proper url to supply API route.
+function urlBuilder(request) {
+  const searchTarget = request.query.data;
+  const searchType = request.query.url;
+  let url = "";
+  switch (searchType) {
+    case "movies":
+      url = `https:// api.themoviedb.org/3/search/movie?api_key=${MOVIE_API_KEY}&query=${searchTarget}`;
+      break;
+    case "search":
+      url = `https:// api.themoviedb.org/3/movie/${searchTarget}api_key=${MOVIE_API_KEY}&language=en-US`;
+      break;
+    default:
+      // TODO: Is this default correct?
+      url = `https:// api.themoviedb.org/3/search/movie?api_key=${MOVIE_API_KEY}&query=${searchTarget}`;
+  }
 
-// Look for the results in the database
-// function lookup(options) {
-//   const SQL = `SELECT * FROM ${options.tableName} WHERE location_id=$1;`;
-//   const values = [options.location];
+  return url;
+}
 
-//   client
-//     .query(SQL, values)
-//     .then(result => {
-//       if (result.rowCount > 0) {
-//         options.cacheHit(result);
-//       } else {
-//         options.cacheMiss();
-//       }
-//     })
-//     .catch(error => handleError(error));
-// }
+// TODO: Implement lookup from DB
+// Movies.lookup = lookup;
 
-//Save into DB
-// Movies.prototype = {
-//   save: function(user_id) {
-//     const SQL = `INSERT INTO ${
-//       this.tableName
-//     } (title, synopsis, released_on, image_url, user_id) VALUES ($1, $2, $3, $4, $5);`;
+//  Look for the results in the database
+//  function lookup(options) {
+//    const SQL = `SELECT * FROM ${options.tableName} WHERE location_id=$1;`;
+//    const values = [options.location];
 
-//     const values = [
-//       this.title,
-//       this.synopsis,
-//       this.released_on,
-//       this.image_url,
-//       this.user_id
-//     ];
+//    client
+//      .query(SQL, values)
+//      .then(result => {
+//        if (result.rowCount > 0) {
+//          options.cacheHit(result);
+//        } else {
+//          options.cacheMiss();
+//        }
+//      })
+//      .catch(error => handleError(error));
+//  }
 
-//     client.query(SQL, values);
-//   }
-// };
+// Save into DB
+//  Movies.prototype = {
+//    save: function(user_id) {
+//      const SQL = `INSERT INTO ${
+//        this.tableName
+//      } (title, synopsis, released_on, image_url, user_id) VALUES ($1, $2, $3, $4, $5);`;
 
-// function getMovies(request, response) {
-//   Movies.lookup({
-//     tableName: Movies.tableName,
+//      const values = [
+//        this.title,
+//        this.synopsis,
+//        this.released_on,
+//        this.image_url,
+//        this.user_id
+//      ];
 
-//     location: request.query.data.id,
+//      client.query(SQL, values);
+//    }
+//  };
 
-//     cacheHit: function (result) {
+//  function getMovies(request, response) {
+//    Movies.lookup({
+//      tableName: Movies.tableName,
 
-//       response.send(result.rows);
-//     },
+//      location: request.query.data.id,
 
-//     cacheMiss: function () {
-//       const locationName = request.query.data.search_query;
-//       const url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&query=${locationName}`;
+//      cacheHit: function (result) {
 
-//       superagent.get(url)
-//         .then(result => {
-//           const movies = result.body.results.map(movieData => {
-//             const movie = new Movies(movieData);
-//             movie.save(request.query.data.id);
-//             return movie;
-//           });
+//        response.send(result.rows);
+//      },
 
-//           response.send(movies);
-//         })
-//         .catch(error => handleError(error, response));
-//     }
-//   })
-// }
+//      cacheMiss: function () {
+//        const locationName = request.query.data.search_query;
+//        const url = `https:// api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&query=${locationName}`;
 
-//TODO: circle back for social media API
+//        superagent.get(url)
+//          .then(result => {
+//            const movies = result.body.results.map(movieData => {
+//              const movie = new Movies(movieData);
+//              movie.save(request.query.data.id);
+//              return movie;
+//            });
+
+//            response.send(movies);
+//          })
+//          .catch(error => handleError(error, response));
+//      }
+//    })
+//  }
+
+// TODO: circle back for social media API
