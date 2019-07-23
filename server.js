@@ -5,13 +5,20 @@ const express = require('express');
 const superagent = require('superagent');
 const pg = require('pg');
 const cors = require('cors');
+const bodyParser = require('body-parser')
 
 require('dotenv').config();
+
 
 // Application setup
 const app = express();
 app.use(cors());
-const PORT = process.env.PORT || 5000;
+
+// Parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// Parse application/json
+app.use(bodyParser.json())
 
 // DB setup
 const client = new pg.Client(process.env.DATABASE_URL);
@@ -19,11 +26,13 @@ client.connect();
 client.on('error', err => console.error(err));
 
 // Global variable declaration.
+const PORT = process.env.PORT || 5000;
 const MOVIE_API_KEY = process.env.MOVIE_API_KEY;
 
 // API Routes
 app.get('/search', getMovieAPIResults);
 app.get('/movies', getMovieAPIResults);
+app.post('/review', postUserReview);
 
 // Ensures server is listening for requests
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
@@ -84,6 +93,58 @@ function dataBuilder(res) {
   }
 }
 
+// Begin DB manipulation.
+function postUserReview(request, response) {
+  console.log('request.body: ', request.body);
+  const movieSQL = `INSERT INTO movies (movie_id, title, synopsis, released_on, image_url) VALUES ($1, $2, $3, $4, $5)`;
+
+  const reviewSQL = `INSERT INTO reviews (review, rating, recommended, created_on, user_id, movie_id) VALUES ($1, $2, $3, $4, $5, $6)`;
+
+  const movieValues = [
+    request.body.movie.movie_id,
+    request.body.movie.title,
+    request.body.movie.synopsis,
+    request.body.movie.released_on,
+    request.body.movie.image_url
+  ];
+  client.query(movieSQL, movieValues);
+
+  const reviewValues = [
+    request.body.review.text,
+    request.body.review.rating,
+    request.body.review.recommended,
+    Date.now(),
+    request.body.user_id,
+    request.body.movie.movie_id,
+  ];
+  client.query(reviewSQL, reviewValues);
+
+  return response.send('Success');
+}
+
+// request.body: {
+//     user_id: '1',
+//      movie: {
+//         movie_id: '299534',
+//            title: 'Avengers: Endgame',
+//              overview: 'After the devastating events of Avengers: Infinity War, the ' +
+//                   'universe is in ruins due to the efforts of the Mad Titan, Thanos. ' +
+//                     'With the help of remaining allies, the Avengers must assemble once ' +
+//                      "more in order to undo Thanos' actions and restore order to the " +
+//                      'universe once and for all, no matter what consequences may be in ' +
+//                          'store.',
+//                         image_url: 'https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg'
+//                       
+//     },
+//      review: {
+//      text: 'I love this movie. Now and always.',
+//          rating: 1.4,
+//            recommended: '0'
+//        
+//   }
+//   
+// }
+
 // TODO: Implement lookup from DB
 // Movies.lookup = lookup;
 
@@ -109,7 +170,7 @@ function dataBuilder(res) {
 //    save: function(user_id) {
 //      const SQL = `INSERT INTO ${
 //        this.tableName
-//      } (title, synopsis, released_on, image_url, user_id) VALUES ($1, $2, $3, $4, $5);`;
+//      } (title, synopsis, released_on, image_url, user_id) VALUES ($1, $2, $3, $4, $5);
 
 //      const values = [
 //        this.title,
