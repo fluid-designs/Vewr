@@ -33,7 +33,8 @@ function handleError(err, result) {
 
 //Movies Constructor
 function Movies(movie) {
-  this.tableName - 'movies';
+  this.tableName = 'movies';
+  this.movie_id = movie.id;
   this.title = movie.original_title;
   this.synopsis = movie.overview;
   this.released_on = movie.released_date;
