@@ -5,20 +5,26 @@ import { Link } from "react-router-dom";
 export default function Navbar() {
   return (
     <Fragment>
-      <div className="Navbar">
+      <nav className="Navbar">
         <Link to="/">
-          <h3>VEWR</h3>
+          <h1>VEWR</h1>
         </Link>
 
         <ul>
           <Link to="/dashboard">
             <li>Dashboard</li>
           </Link>
+          <Link to="/search">
+            <li>Search</li>
+          </Link>
+          <Link to="/review">
+            <li>Review</li>
+          </Link>
           <Link to="/about-us">
-            <li>About Us</li>
+            <li>About</li>
           </Link>
         </ul>
-      </div>
+      </nav>
     </Fragment>
   );
 }

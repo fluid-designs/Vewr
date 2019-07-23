@@ -2,3 +2,29 @@ body {
   color: aqua;
   background-color: darkcyan;
 }
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 10vh;
+  background: rgb(209, 216, 218);
+}
+
+nav > a {
+  text-decoration: none;
+}
+
+nav > ul {
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+  list-style-type: none;
+  flex-direction: row;
+}
+
+nav > ul > a {
+  margin-left: 10px;
+  margin-right: 10px;
+  text-decoration: none;
+}
