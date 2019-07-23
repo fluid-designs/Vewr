@@ -96,7 +96,7 @@ function dataBuilder(res) {
 // Begin DB manipulation.
 function postUserReview(request, response) {
   console.log('request.body: ', request.body);
-  const movieSQL = `INSERT INTO movies (movie_id, title, synopsis, released_on, image_url) VALUES ($1, $2, $3, $4, $5)`;
+  const movieSQL = `INSERT INTO movies (movie_id, title, synopsis, released_on, image_url) VALUES ($1, $2, $3, $4, $5) RETURNING *`;
 
   const reviewSQL = `INSERT INTO reviews (review, rating, recommended, created_on, user_id, movie_id) VALUES ($1, $2, $3, $4, $5, $6)`;
 
@@ -107,7 +107,6 @@ function postUserReview(request, response) {
     request.body.movie.released_on,
     request.body.movie.image_url
   ];
-  client.query(movieSQL, movieValues);
 
   const reviewValues = [
     request.body.review.text,
@@ -117,9 +116,15 @@ function postUserReview(request, response) {
     request.body.user_id,
     request.body.movie.movie_id,
   ];
-  client.query(reviewSQL, reviewValues);
 
-  return response.send('Success');
+  client
+    .query(movieSQL, movieValues)
+    .then(res => {
+      console.log(res.rows[0])
+    })
+    .catch(e => console.error(e.stack))
+
+  // return response.send('Success');
 }
 
 // request.body: {
