@@ -9,14 +9,14 @@ export default class Login extends Component {
     };
   }
 
-  handleChange = (e) => {
+  handleChange = (event) => {
     this.setState({
-      username: e.target.value
+      username: event.target.value
     });
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
+  handleSubmit = (event) => {
+    event.preventDefault();
 
     console.log("Username: ", this.state.username);
 
