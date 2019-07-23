@@ -54,10 +54,8 @@ function getMovieAPIResults(request, response) {
         const movie = new Movies(movieData);
         // movie.save(request.query.data.id);
 
-        console.log('movie: ', movie);
         return movie;
       });
-      console.log('movies: ', movies);
       response.send(movies);
     })
     .catch(error => handleError(error, response));

@@ -22,8 +22,7 @@ export default class Search extends Component{
         data: this.state.query
       })
       .then(result => {
-        console.log('search ', result.body);
-        this.setState({
+         this.setState({
           movies: result.body
         })
       })
