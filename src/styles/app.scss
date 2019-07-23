@@ -1,6 +1,11 @@
+@import url("https://fonts.googleapis.com/css?family=Audiowide&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Gugi&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
+
 body {
   color: aqua;
   background-color: darkcyan;
+  font-family: "Open Sans", sans-serif;
 }
 
 nav {
@@ -27,4 +32,10 @@ nav > ul > a {
   margin-left: 10px;
   margin-right: 10px;
   text-decoration: none;
+}
+
+#title-logo {
+  font-size: 2em;
+  font-family: "Audiowide", cursive;
+  // font-family: "Gugi", cursive;
 }
