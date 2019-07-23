@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "concurrently": "^4.1.1",
     "cors": "^2.8.5",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
@@ -15,6 +16,7 @@
     "superagent": "^5.1.0"
   },
   "scripts": {
+    "dev": "concurrently \"nodemon server.js\" \"npm start\"",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -37,7 +39,9 @@
   },
   "description": "A simple web application that allows users to view and review their favorite movies & TV Shows.",
   "main": "server.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fluid-designs/Vewr.git"
