@@ -38,8 +38,8 @@ A simple web application that allows users to view and review their favorite mov
 
 ## Authors
 * **Matt Stuhring** 
-* **Brandon Hurrington** 
 * **Jane Hur** 
+* **Brandon Hurrington** 
 * **Melfi Perez** 
 
 
