@@ -58,8 +58,8 @@ export default class Dashboard extends Component{
     return (
       <Fragment>
         <div id="dashboard" className="component-container">
-        <img className="profile-pic" src={`https://avatars.dicebear.com/v2/bottts/${this.state.userId}.svg`} />
-          <h2>{`Welcome, ${this.state.userId}!!`}</h2>
+        <img className="profile-pic" src={`https://avatars.dicebear.com/v2/bottts/${this.state.userId}.svg`} alt="Profile" />
+          <h1>{`Welcome, ${this.state.userId}!!`}</h1>
 
           <div id="react-tab">
             <Tabs 
@@ -72,8 +72,27 @@ export default class Dashboard extends Component{
               <Tab><i className="fas fa-film"/> Movies</Tab>
             </TabList>
             <PanelList className="panel-list">
-              <Panel>List of suggested movies</Panel>
-              <Panel>Display movies that you have reviewed</Panel>
+              <Panel>
+                <h2>Suggested Movies</h2>
+              {/* TODO: Render list of suggested movies  */}
+              {/* <ul className="movie-list">
+            {this.state.movies.map(movie => {
+              return <li key={movie.movie_id}>
+              <div className="movie-poster"><Link to={`/review/${movie.movie_id}`}><img src={movie.image_url} /></Link></div>
+              <div>
+                <Link to={`/review/${movie.movie_id}`}>
+                  <h3>{movie.title}</h3>
+                </Link>
+                <p className="synopsis">{movie.synopsis}</p>
+              </div>
+              </li>
+            })}
+          </ul> */}
+
+              </Panel>
+              <Panel>
+              <h2>Reviewed Movies</h2>
+              </Panel>
             </PanelList>
           </Tabs>
           </div>

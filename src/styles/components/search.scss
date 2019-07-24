@@ -1,11 +1,34 @@
 #Search {
-  img {
-    width: 80px;
+  .movie-list{
+    img {
+      width: 80px;
+    }
+    .synopsis{
+      font-size: $medium-font-size;
+      float: left;
+      text-align: left;
+    }
+    li{
+      display: flex;
+      margin-bottom: 1.5em;
+    }
+    .movie-poster{
+      margin-right: 1em;
+    }
+    h3 {
+      margin-top: 0;
+      margin-bottom: 0;
+      text-align: left;
+    }
   }
 
-  .synopsis{
-    font-size: $medium-font-size;
-    float: left;
-    text-align: left;
-  }
+  
+
+  
+
+  
+
+  
+
+  
 }

@@ -39,14 +39,16 @@ export default class Search extends Component{
       <Fragment>
         <div id="Search" className="component-container">
           <h1>Search results</h1>
-          <ul>
+          <ul className="movie-list">
             {this.state.movies.map(movie => {
               return <li key={movie.movie_id}>
-              <img src={movie.image_url} />
-              <Link to={`/review/${movie.movie_id}`}>
-                <h3>{movie.title}</h3>
-              </Link>
-              <p className="synopsis">{movie.synopsis}</p>
+              <div className="movie-poster"><Link to={`/review/${movie.movie_id}`}><img src={movie.image_url} alt={movie.title} /></Link></div>
+              <div>
+                <Link to={`/review/${movie.movie_id}`}>
+                  <h3>{movie.title}</h3>
+                </Link>
+                <p className="synopsis">{movie.synopsis}</p>
+              </div>
               </li>
             })}
           </ul>

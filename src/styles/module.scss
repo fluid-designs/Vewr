@@ -2,7 +2,6 @@ $form-border-radius: 3px;
 
 form{
 	font: $body-font-stack;
-	max-width: 400px;
 	margin: 10px auto 0 auto;
   padding: 16px; 
 }
@@ -18,19 +17,15 @@ form input[type="url"],
 form textarea,
 form select 
 {
-	-webkit-transition: all 0.30s ease-in-out;
-	-moz-transition: all 0.30s ease-in-out;
-	-ms-transition: all 0.30s ease-in-out;
-	-o-transition: all 0.30s ease-in-out;
 	outline: none;
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	border-radius: $form-border-radius;
 	background: #fff;
-	margin-bottom: 4%;
+	margin-bottom: 10px;
 	border: 1px solid #ccc;
-	padding: 3%;
+	padding: 10px;
 	color: #555;
 	font: $body-font-stack;
 }
@@ -46,7 +41,7 @@ form textarea:focus,
 form select:focus
 {
 	box-shadow: 0 0 5px $primary-color;
-	padding: 3%;
+	padding: 10px;
 	border: 1px solid $primary-color;
 }
 
@@ -55,7 +50,7 @@ form input[type="button"], button{
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
-	padding: 3%;
+	padding: 10px;
 	background: $secondary-color;
 	border-bottom: 2px solid $primary-color;
 	border-top-style: none;
@@ -63,8 +58,13 @@ form input[type="button"], button{
 	border-left-style: none;	
 	color: #fff;
 	border-radius: $form-border-radius;
+	clear: both;
 }
 form input[type="submit"]:hover,
 form input[type="button"]:hover, button:hover{
 	background: #2EBC99;
+}
+select{
+	-webkit-appearance: menulist-button;
+	height:35px;
 }

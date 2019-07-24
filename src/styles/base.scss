@@ -4,6 +4,7 @@ h1, h2, h3, h4, h5, h6 {
   color: $nav-theme-1; 
   font-family: $heading-font-stack;
   margin: 20px 0;
+  font-weight: 700;
 }
 
 h1 {font-size: 30px}
@@ -16,3 +17,5 @@ p {
   font-family: $body-font-stack;
   margin: 15px 0;
 }
+
+
