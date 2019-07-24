@@ -187,5 +187,3 @@ function getUser(request, response) {
     })
     .catch(e => console.error(e.stack));
 }
-
-// TODO: circle back for social media API

@@ -1,4 +1,5 @@
 import React, { Fragment, Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Tabs, TabList, Tab, PanelList, Panel } from 'react-tabtab';
 import * as customStyle from 'react-tabtab/lib/themes/bootstrap';
 import superagent from 'superagent';
@@ -29,7 +30,7 @@ export default class Dashboard extends Component {
         const reviews = await superagent.get('/reviews').query({data: userId});
 
         this.setState({
-          reviews: reviews.body,
+          reviewedMovies: reviews.body,
           suggested: suggestions.body,
           userId: JSON.parse(localStorage.getItem('userId')), 
           userName: JSON.parse(localStorage.getItem('userName'))
@@ -51,7 +52,6 @@ export default class Dashboard extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    console.log('Query: ', this.state.query);
     this.props.history.push(`/search/${this.state.query}`);
   };
 
@@ -81,24 +81,43 @@ export default class Dashboard extends Component {
             <PanelList className="panel-list">
               <Panel>
                 <h2>Suggested Movies</h2>
-              {/* TODO: Render list of suggested movies  */}
-              {/* <ul className="movie-list">
-            {this.state.movies.map(movie => {
-              return <li key={movie.movie_id}>
-              <div className="movie-poster"><Link to={`/review/${movie.movie_id}`}><img src={movie.image_url} /></Link></div>
-              <div>
-                <Link to={`/review/${movie.movie_id}`}>
-                  <h3>{movie.title}</h3>
-                </Link>
-                <p className="synopsis">{movie.synopsis}</p>
-              </div>
-              </li>
-            })}
-          </ul> */}
+                
+                <ul className="suggested-list">
+                  {this.state.suggested.map(movie => {
+                    return <li key={movie.movie_id}>
+                    <div className="movie-poster"><Link to={`/review/${movie.movie_id}`}><img src={movie.image_url} /></Link></div>
+                    <div>
+                      <Link to={`/review/${movie.movie_id}`}>
+                        <h3>{movie.title}</h3>
+                      </Link>
+                      <p className="synopsis">{movie.synopsis}</p>
+                    </div>
+                    </li>
+                  })}
+                </ul>
 
               </Panel>
               <Panel>
-              <h2>Reviewed Movies</h2>
+                <h2>Reviewed Movies</h2>
+
+                <ul className="movie-list">
+                  {this.state.reviewedMovies.map(review => {
+                    return <li key={review.id}>
+                      <div className="review-poster">
+                        <Link to={`/review/${review.movie_id}`}>
+                          <img src={review.image_url} />
+                        </Link>
+                      </div>
+                      <div>
+                        <Link to={`/review/${review.movie_id}`}>
+                          <h3>{review.title}</h3>
+                        </Link>
+                        <p>Review: {review.review}</p>
+                        <p>Rating: {review.rating}</p>
+                      </div>
+                    </li>
+                  })}
+                </ul>
               </Panel>
             </PanelList>
           </Tabs>
