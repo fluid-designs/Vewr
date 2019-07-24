@@ -34,12 +34,11 @@ export default class Login extends Component {
       .then(result => {
         console.log('result body: ', result.body);
         this.saveUserId(result.body.id);
+        this.props.history.push('/dashboard');
       })
       .catch(err => {
         console.log(err);
       });
-
-    this.props.history.push('/dashboard');
   };
 
   render() {
