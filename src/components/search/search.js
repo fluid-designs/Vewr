@@ -42,10 +42,11 @@ export default class Search extends Component{
           <ul>
             {this.state.movies.map(movie => {
               return <li key={movie.movie_id}>
+              <img src={movie.image_url} />
               <Link to={`/review/${movie.movie_id}`}>
                 <h3>{movie.title}</h3>
               </Link>
-              <p>{movie.synopsis}</p>
+              <p className="synopsis">{movie.synopsis}</p>
               </li>
             })}
           </ul>
