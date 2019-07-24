@@ -10,11 +10,14 @@
 @import "./components/dashboard";
 @import "./components/about-us";
 @import "./components/navbar";
+@import "./components/search";
+
 
 body {
   color: $text-theme-1;
   background-color: $background-theme-1;
   font-family: $body-font-stack;
+  line-height: 1.25;
 }
 
 

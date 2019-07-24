@@ -1,31 +1,46 @@
-import React, { Fragment, Component } from "react";
+import React, { Fragment, Component } from 'react';
+import superagent from 'superagent';
 
 export default class Login extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      username: ""
+      username: ''
     };
   }
 
-  saveUserId = (id) => {
-    localStorage.setItem('userId', JSON.stringify(id))
+  saveUserId = id => {
+    localStorage.setItem('userId', JSON.stringify(id));
     // TODO save the ID from the backend to LS
-  }
+  };
 
-  handleChange = (event) => {
+  handleChange = event => {
     this.setState({
       username: event.target.value
     });
-  }
+  };
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
-    console.log("Username: ", this.state.username);
-    this.saveUserId(1);
-    this.props.history.push("/dashboard");
-  }
+    console.log('Username: ', this.state.username);
+
+    //login routing to connect to backend
+    superagent
+      .get('/login')
+      .query({
+        data: this.state.username
+      })
+      .then(result => {
+        console.log('result body: ', result.body);
+        this.saveUserId(result.body.id);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    this.props.history.push('/dashboard');
+  };
 
   render() {
     return (
@@ -44,7 +59,7 @@ export default class Login extends Component {
                 required
               />
             </div>
-            
+
             <div>
               <button type="submit">Submit</button>
             </div>

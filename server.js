@@ -5,20 +5,19 @@ const express = require('express');
 const superagent = require('superagent');
 const pg = require('pg');
 const cors = require('cors');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 
 require('dotenv').config();
-
 
 // Application setup
 const app = express();
 app.use(cors());
 
 // Parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // Parse application/json
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 // DB setup
 const client = new pg.Client(process.env.DATABASE_URL);
@@ -33,6 +32,8 @@ const MOVIE_API_KEY = process.env.MOVIE_API_KEY;
 app.get('/search', getMovieAPIResults);
 app.get('/movies', getMovieAPIResults);
 app.post('/review', postUserReview);
+app.get('/login', getUser);
+app.get('/suggestions', getSuggestions);
 
 // Ensures server is listening for requests
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
@@ -54,6 +55,24 @@ function Movies(movie) {
     `https://image.tmdb.org/t/p/w500${movie.poster_path}` || 'Image';
 }
 
+//Grabs Suggestions from API and send it back to Dashboard
+function getSuggestions(request, response) {
+  const suggestionsURL = `https://api.themoviedb.org/3/movie/popular?api_key=${MOVIE_API_KEY}&language=en-US&page=1`;
+
+  superagent
+    .get(suggestionsURL)
+    .then(res => {
+      return res.body.results.map(movieData => new Movies(movieData));
+    })
+    .then(results => {
+      response.send(results);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+}
+
+//Grabs movies from our API
 function getMovieAPIResults(request, response) {
   const url = urlBuilder(request);
 
@@ -72,14 +91,14 @@ function urlBuilder(request) {
   const searchType = request.query.url;
   let url = '';
   switch (searchType) {
-    case 'movies':
-      url = `https://api.themoviedb.org/3/search/movie?api_key=${MOVIE_API_KEY}&query=${searchTarget}`;
-      break;
-    case 'search':
-      url = `https://api.themoviedb.org/3/movie/${searchTarget}?api_key=${MOVIE_API_KEY}&language=en-US`;
-      break;
-    default:
-      url = `https://api.themoviedb.org/3/search/movie?api_key=${MOVIE_API_KEY}&query=${searchTarget}`;
+  case 'movies':
+    url = `https://api.themoviedb.org/3/search/movie?api_key=${MOVIE_API_KEY}&query=${searchTarget}`;
+    break;
+  case 'search':
+    url = `https://api.themoviedb.org/3/movie/${searchTarget}?api_key=${MOVIE_API_KEY}&language=en-US`;
+    break;
+  default:
+    url = `https://api.themoviedb.org/3/search/movie?api_key=${MOVIE_API_KEY}&query=${searchTarget}`;
   }
   return url;
 }
@@ -97,9 +116,6 @@ function dataBuilder(res) {
 function postUserReview(request, response) {
   console.log('request.body: ', request.body);
   const movieSQL = `INSERT INTO movies (movie_id, title, synopsis, released_on, image_url) VALUES ($1, $2, $3, $4, $5) RETURNING *`;
-
-  const reviewSQL = `INSERT INTO reviews (review, rating, recommended, created_on, user_id, movie_id) VALUES ($1, $2, $3, $4, $5, $6)`;
-
   const movieValues = [
     request.body.movie.movie_id,
     request.body.movie.title,
@@ -108,23 +124,59 @@ function postUserReview(request, response) {
     request.body.movie.image_url
   ];
 
-  const reviewValues = [
-    request.body.review.text,
-    request.body.review.rating,
-    request.body.review.recommended,
-    Date.now(),
-    request.body.user_id,
-    request.body.movie.movie_id,
-  ];
-
   client
     .query(movieSQL, movieValues)
     .then(res => {
-      console.log(res.rows[0])
+      console.log(res.rows[0]);
+      const reviewSQL = `INSERT INTO reviews (review, rating, recommended, created_on, user_id, movie_id) VALUES ($1, $2, $3, $4, $5, $6)`;
+      const reviewValues = [
+        request.body.review.text,
+        request.body.review.rating,
+        request.body.review.recommended,
+        Date.now(),
+        request.body.user_id,
+        res.rows[0].id
+      ];
+
+      client
+        .query(reviewSQL, reviewValues)
+        .then(res => {
+          response.send('yay');
+        })
+        .catch(e => console.error(e.stack));
     })
-    .catch(e => console.error(e.stack))
+    .catch(e => console.error(e.stack));
 
   // return response.send('Success');
+}
+
+//Checks db if user exits and creates user if they do not exist.
+function getUser(request, response) {
+  console.log('User Input: ', request.query);
+
+  const userLookupSQL = `SELECT * FROM users WHERE username = $1`;
+  const userLookupValues = [request.query.data];
+
+  const userInsertSQL = `INSERT INTO users (username) VALUES ($1) RETURNING *`;
+  const userInsertValues = [request.query.data];
+
+  client
+    .query(userLookupSQL, userLookupValues)
+    .then(res => {
+      if (res.rows.length === 0) {
+        client
+          .query(userInsertSQL, userInsertValues)
+          .then(res => {
+            response.send(res.rows[0]);
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      } else {
+        response.send(res.rows[0]);
+      }
+    })
+    .catch(e => console.error(e.stack));
 }
 
 // request.body: {
@@ -139,15 +191,15 @@ function postUserReview(request, response) {
 //                      'universe once and for all, no matter what consequences may be in ' +
 //                          'store.',
 //                         image_url: 'https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg'
-//                       
+//
 //     },
 //      review: {
 //      text: 'I love this movie. Now and always.',
 //          rating: 1.4,
 //            recommended: '0'
-//        
+//
 //   }
-//   
+//
 // }
 
 // TODO: Implement lookup from DB
@@ -170,24 +222,7 @@ function postUserReview(request, response) {
 //      .catch(error => handleError(error));
 //  }
 
-// Save into DB
-//  Movies.prototype = {
-//    save: function(user_id) {
-//      const SQL = `INSERT INTO ${
-//        this.tableName
-//      } (title, synopsis, released_on, image_url, user_id) VALUES ($1, $2, $3, $4, $5);
-
-//      const values = [
-//        this.title,
-//        this.synopsis,
-//        this.released_on,
-//        this.image_url,
-//        this.user_id
-//      ];
-
-//      client.query(SQL, values);
-//    }
-//  };
+//
 
 //  function getMovies(request, response) {
 //    Movies.lookup({
@@ -200,23 +235,6 @@ function postUserReview(request, response) {
 //        response.send(result.rows);
 //      },
 
-//      cacheMiss: function () {
-//        const locationName = request.query.data.search_query;
-//        const url = `https:// api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&query=${locationName}`;
-
-//        superagent.get(url)
-//          .then(result => {
-//            const movies = result.body.results.map(movieData => {
-//              const movie = new Movies(movieData);
-//              movie.save(request.query.data.id);
-//              return movie;
-//            });
-
-//            response.send(movies);
-//          })
-//          .catch(error => handleError(error, response));
-//      }
-//    })
-//  }
+//
 
 // TODO: circle back for social media API

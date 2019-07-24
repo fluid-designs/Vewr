@@ -12,9 +12,9 @@
     margin-bottom: 20px;
     font-size: 30px;
   }
-
-  button {
-    margin-top: 20px;
-    background: $background-theme-1;
+  
+  button, form input[type="text"] {
+    width: 100%;
   }
+
 }
