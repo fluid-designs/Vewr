@@ -33,6 +33,8 @@ app.get('/search', getMovieAPIResults);
 app.get('/movies', getMovieAPIResults);
 app.post('/review', postUserReview);
 app.get('/login', getUser);
+app.get('/suggestions', getSuggestions);
+app.get('/reviews', getUserReviews);
 
 // Ensures server is listening for requests
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
@@ -54,6 +56,24 @@ function Movies(movie) {
     `https://image.tmdb.org/t/p/w500${movie.poster_path}` || 'Image';
 }
 
+//Grabs Suggestions from API and send it back to Dashboard
+function getSuggestions(request, response) {
+  const suggestionsURL = `https://api.themoviedb.org/3/movie/popular?api_key=${MOVIE_API_KEY}&language=en-US&page=1`;
+
+  superagent
+    .get(suggestionsURL)
+    .then(res => {
+      return res.body.results.map(movieData => new Movies(movieData));
+    })
+    .then(results => {
+      response.send(results);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+}
+
+//Grabs movies from our API
 function getMovieAPIResults(request, response) {
   const url = urlBuilder(request);
 
@@ -64,6 +84,20 @@ function getMovieAPIResults(request, response) {
       response.send(resultData);
     })
     .catch(error => handleError(error, response));
+}
+
+//Grabs user reviews to display on Dashboard
+function getUserReviews(request, response) {
+  const userReviewLookupSQL = `SELECT * FROM reviews INNER JOIN movies ON reviews.movie_id = movies.id WHERE reviews.user_id = $1`;
+  const userReviewLookupValues = [parseInt(request.query.data)];
+
+  client
+    .query(userReviewLookupSQL, userReviewLookupValues)
+    .then(res => {
+      console.log('review rows: ', res.rows);
+      response.send(res.rows);
+    })
+    .catch(e => console.error(e.stack));
 }
 
 // Function to determine proper url to supply API route.
@@ -95,7 +129,6 @@ function dataBuilder(res) {
 
 // Begin DB manipulation.
 function postUserReview(request, response) {
-  console.log('request.body: ', request.body);
   const movieSQL = `INSERT INTO movies (movie_id, title, synopsis, released_on, image_url) VALUES ($1, $2, $3, $4, $5) RETURNING *`;
   const movieValues = [
     request.body.movie.movie_id,
@@ -108,14 +141,13 @@ function postUserReview(request, response) {
   client
     .query(movieSQL, movieValues)
     .then(res => {
-      console.log(res.rows[0]);
       const reviewSQL = `INSERT INTO reviews (review, rating, recommended, created_on, user_id, movie_id) VALUES ($1, $2, $3, $4, $5, $6)`;
       const reviewValues = [
         request.body.review.text,
         request.body.review.rating,
         request.body.review.recommended,
         Date.now(),
-        request.body.user_id,
+        parseInt(request.body.user_id),
         res.rows[0].id
       ];
 
@@ -127,14 +159,10 @@ function postUserReview(request, response) {
         .catch(e => console.error(e.stack));
     })
     .catch(e => console.error(e.stack));
-
-  // return response.send('Success');
 }
 
 //Checks db if user exits and creates user if they do not exist.
 function getUser(request, response) {
-  console.log('User Input: ', request.query);
-
   const userLookupSQL = `SELECT * FROM users WHERE username = $1`;
   const userLookupValues = [request.query.data];
 
@@ -159,63 +187,5 @@ function getUser(request, response) {
     })
     .catch(e => console.error(e.stack));
 }
-
-// request.body: {
-//     user_id: '1',
-//      movie: {
-//         movie_id: '299534',
-//            title: 'Avengers: Endgame',
-//              overview: 'After the devastating events of Avengers: Infinity War, the ' +
-//                   'universe is in ruins due to the efforts of the Mad Titan, Thanos. ' +
-//                     'With the help of remaining allies, the Avengers must assemble once ' +
-//                      "more in order to undo Thanos' actions and restore order to the " +
-//                      'universe once and for all, no matter what consequences may be in ' +
-//                          'store.',
-//                         image_url: 'https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg'
-//
-//     },
-//      review: {
-//      text: 'I love this movie. Now and always.',
-//          rating: 1.4,
-//            recommended: '0'
-//
-//   }
-//
-// }
-
-// TODO: Implement lookup from DB
-// Movies.lookup = lookup;
-
-//  Look for the results in the database
-//  function lookup(options) {
-//    const SQL = `SELECT * FROM ${options.tableName} WHERE location_id=$1;`;
-//    const values = [options.location];
-
-//    client
-//      .query(SQL, values)
-//      .then(result => {
-//        if (result.rowCount > 0) {
-//          options.cacheHit(result);
-//        } else {
-//          options.cacheMiss();
-//        }
-//      })
-//      .catch(error => handleError(error));
-//  }
-
-//
-
-//  function getMovies(request, response) {
-//    Movies.lookup({
-//      tableName: Movies.tableName,
-
-//      location: request.query.data.id,
-
-//      cacheHit: function (result) {
-
-//        response.send(result.rows);
-//      },
-
-//
 
 // TODO: circle back for social media API

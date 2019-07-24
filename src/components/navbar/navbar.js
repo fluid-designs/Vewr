@@ -7,10 +7,10 @@ export default function Navbar() {
     <Fragment>
       <nav className="navbar">
         <Link to="/">
-          <h1 id="title-logo">VEWR</h1>
+          <div id="title-logo"></div>
         </Link>
 
-        <ul>
+        <ul id="navbar-links">
           <Link to="/dashboard">
             <li>Dashboard</li>
           </Link>

@@ -1,9 +1,9 @@
-import React, { Fragment, Component } from "react";
-import {Tabs, TabList, Tab, PanelList, Panel} from 'react-tabtab';
+import React, { Fragment, Component } from 'react';
+import { Tabs, TabList, Tab, PanelList, Panel } from 'react-tabtab';
 import * as customStyle from 'react-tabtab/lib/themes/bootstrap';
+import superagent from 'superagent';
 
-
-export default class Dashboard extends Component{
+export default class Dashboard extends Component {
   constructor(props) {
     super(props);
 
@@ -14,59 +14,81 @@ export default class Dashboard extends Component{
       suggested: [],
       reviewedMovies: []
     };
-    
-
   }
 
   // first function that is called what page is loaded
   // will get data first and then render component
-  componentDidMount(){
+  // Gets suggestions data from server
+  componentDidMount() {
     this.getUserId();
+    superagent
+      .get('/suggestions')
+      .then(result => {
+        this.setState({
+          suggested: result.body
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
 
-    // GET data from server
-
+    superagent
+      .get('/reviews')
+      .query({
+        data: JSON.parse(localStorage.getItem('userId'))
+      })
+      .then(result => {
+        this.setState({
+          reviews: result.body
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
-  getUserId = () =>{
-    if(localStorage.getItem('userId')){
+  getUserId = () => {
+    if (localStorage.getItem('userId')) {
       //TODO will get user info to display
       this.setState({
         userId: JSON.parse(localStorage.getItem('userId'))
       });
     } else {
-      this.props.history.push('/')
+      this.props.history.push('/');
     }
-  }
+  };
 
-  handleChange = (event) => {
+  handleChange = event => {
     this.setState({
       query: event.target.value
     });
-  }
+  };
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
-    console.log("Query: ", this.state.query);
+    console.log('Query: ', this.state.query);
     this.props.history.push(`/search/${this.state.query}`);
-  }
+  };
 
   handleTabChange = index => {
-    this.setState({activeIndex: index});
-  }
+    this.setState({ activeIndex: index });
+  };
 
-  render(){
+  render() {
     return (
       <Fragment>
         <div id="dashboard" className="component-container">
+
         <img className="profile-pic" src={`https://avatars.dicebear.com/v2/bottts/${this.state.userId}.svg`} alt="Profile" />
           <h1>{`Welcome, ${this.state.userId}!!`}</h1>
 
           <div id="react-tab">
-            <Tabs 
-              customStyle={customStyle} 
-              activeIndex={this.state.activeIndex} 
-              onTabChange={this.handleTabChange} 
+            <Tabs
+              customStyle={customStyle}
+              activeIndex={this.state.activeIndex}
+              onTabChange={this.handleTabChange}
             >
+
             <TabList className="tab-list">
               <Tab><i className="far fa-thumbs-up"/> Suggestions</Tab>
               <Tab><i className="fas fa-film"/> Movies</Tab>
@@ -95,9 +117,9 @@ export default class Dashboard extends Component{
               </Panel>
             </PanelList>
           </Tabs>
+
           </div>
-          
-    
+
           <form onSubmit={this.handleSubmit}>
             <input
               type="text"
