@@ -1,5 +1,12 @@
 * {box-sizing: border-box;}
 
+h1, h2, h3, h4, h5, h6 {
+  color: $nav-theme-1; 
+  font-family: $heading-font-stack;
+  margin: 20px 0;
+  font-weight: 700;
+}
+
 h1 {font-size: 1.5em}
 h2 {font-size: 1.25em}
 h3 {font-size: 1em}
@@ -10,3 +17,5 @@ p {
   font-family: $body-font-stack;
   margin: .05em 0;
 }
+
+

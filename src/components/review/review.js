@@ -7,7 +7,8 @@ export default class Review extends Component {
     this.state = {
       movie_id: this.props.match.params.movie_id,
       movie: {},
-      review: ''
+      review: '', 
+      rating: 1
     };
   }
 
@@ -22,7 +23,7 @@ export default class Review extends Component {
         url: 'search'
       })
       .then(result => {
-        console.log(result.body);
+        //console.log(result.body);
         this.setState({
           movie: result.body
         });
@@ -32,15 +33,21 @@ export default class Review extends Component {
       });
   }
 
-  handleChange = event => {
+  handleChangeReview = event => {
     this.setState({
       review: event.target.value
     });
   };
 
+  handleChangeRating = event => {
+    this.setState({
+      rating: event.target.value
+    });
+  };
+
   handleSubmit = event => {
     event.preventDefault();
-    console.log('Review: ', this.state.review);
+    
     // TODO Send post request to server which will save review into DB
     // Send an object which includes the user id, review, movie id, rating & recommend
     // Send movie details data movie_id, title, overview, released_on, image_url
@@ -56,17 +63,18 @@ export default class Review extends Component {
       },
       review: {
         text: this.state.review,
-        rating: 1.4,
+        rating: this.state.rating,
         recommended: '0'
       }
-    };
 
+    };
+    console.log('data', data);
     superagent
       .post('/review')
       .set('Content-Type', 'application/json')
       .send(data)
       .then(result => {
-        console.log(result.body);
+        //console.log(result.body);
         this.props.history.push('/dashboard');
       })
       .catch(err => {
@@ -79,12 +87,18 @@ export default class Review extends Component {
       <Fragment>
         <div id="Review" className="component-container">
           <section className="movie-info">
-            <h1>{this.state.movie.title}</h1>
-            <p>{this.state.movie.synopsis}</p>
-            <img
+          <div className="movie-poster">
+                <img
               src={this.state.movie.image_url}
-              alt={this.state.movie.title}
-            />
+              alt={this.state.movie.title}/>
+            </div>
+            <div>
+              <h1>{this.state.movie.title}</h1>
+              <h4>Movie Synopsis: </h4>
+              <p className="synopsis">{this.state.movie.synopsis}</p>
+            </div>
+            
+            
           </section>
 
           {/* TODO: Check if review already exists for this movie by the current user  */}
@@ -93,11 +107,26 @@ export default class Review extends Component {
             <h2>Review Notes</h2>
             <textarea
               rows="6"
-              cols="50"
+              cols="45"
               value={this.state.review}
-              onChange={this.handleChange}
+              onChange={this.handleChangeReview}
             />
             <p>SLIDER GOES HERE</p>
+            <select
+              value={this.state.rating}
+              onChange={this.handleChangeRating}
+            >
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select><br /><br />
             <button type="submit">Save your review</button>
           </form>
         </div>
