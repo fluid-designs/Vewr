@@ -6,6 +6,7 @@ const superagent = require('superagent');
 const pg = require('pg');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 require('dotenv').config();
 
@@ -28,6 +29,9 @@ client.on('error', err => console.error(err));
 const PORT = process.env.PORT || 5000;
 const MOVIE_API_KEY = process.env.MOVIE_API_KEY;
 
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'client/build')));
+
 // API Routes
 app.get('/search', getMovieAPIResults);
 app.get('/movies', getMovieAPIResults);
@@ -35,6 +39,12 @@ app.post('/review', postUserReview);
 app.get('/login', getUser);
 app.get('/suggestions', getSuggestions);
 app.get('/reviews', getUserReviews);
+
+// The "catchall" handler: for any request that doesn't
+// match one above, send back React's index.html file.
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/client/build/index.html'));
+});
 
 // Ensures server is listening for requests
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
