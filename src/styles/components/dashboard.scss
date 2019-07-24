@@ -1,5 +1,5 @@
 #dashboard {
-  color: $text-color;
+  color: $text-theme-1;
   padding-bottom: 70px;
 
   #react-tab {
@@ -16,7 +16,7 @@
     bottom:0;         
     left:0;
     text-align: center;
-    background-color: $dark-background;
+    background-color: $accent-theme-1;
     padding: 10px;
     width: 100%;
   }
