@@ -33,6 +33,7 @@ app.get('/search', getMovieAPIResults);
 app.get('/movies', getMovieAPIResults);
 app.post('/review', postUserReview);
 app.get('/login', getUser);
+app.get('/suggestions', getSuggestions);
 
 // Ensures server is listening for requests
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
@@ -54,6 +55,24 @@ function Movies(movie) {
     `https://image.tmdb.org/t/p/w500${movie.poster_path}` || 'Image';
 }
 
+//Grabs Suggestions from API and send it back to Dashboard
+function getSuggestions(request, response) {
+  const suggestionsURL = `https://api.themoviedb.org/3/movie/popular?api_key=${MOVIE_API_KEY}&language=en-US&page=1`;
+
+  superagent
+    .get(suggestionsURL)
+    .then(res => {
+      return res.body.results.map(movieData => new Movies(movieData));
+    })
+    .then(results => {
+      response.send(results);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+}
+
+//Grabs movies from our API
 function getMovieAPIResults(request, response) {
   const url = urlBuilder(request);
 
