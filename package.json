@@ -1,50 +1,13 @@
 {
   "name": "vewr",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "body-parser": "^1.19.0",
-    "concurrently": "^4.1.1",
-    "cors": "^2.8.5",
-    "dotenv": "^8.0.0",
-    "express": "^4.17.1",
-    "node-sass": "^4.12.0",
-    "pg": "^7.11.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-router-dom": "^5.0.1",
-    "react-scripts": "3.0.1",
-    "react-tabtab": "^2.0.0",
-    "styled-components": "^4.3.2",
-    "superagent": "^5.1.0"
-  },
-  "scripts": {
-    "dev": "concurrently \"nodemon server.js\" \"react-scripts start\"",
-    "start": "node server.js",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "heroku-postbuild": "cd client && npm install && npm run build"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
+  "version": "1.0.0",
   "description": "A simple web application that allows users to view and review their favorite movies & TV Shows.",
   "main": "server.js",
-  "devDependencies": {
-    "nodemon": "^1.19.1"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "concurrently \"nodemon server.js\" \"npm start --prefix client\"",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "repository": {
     "type": "git",
@@ -56,5 +19,14 @@
     "url": "https://github.com/fluid-designs/Vewr/issues"
   },
   "homepage": "https://github.com/fluid-designs/Vewr#readme",
-  "proxy": "http://localhost:5000"
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "concurrently": "^4.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "node-sass": "^4.12.0",
+    "pg": "^7.11.0",
+    "superagent": "^5.1.0"
+  }
 }

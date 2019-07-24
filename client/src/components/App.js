@@ -1,13 +1,13 @@
-import React, { Fragment, Component } from "react";
+import React, { Fragment, Component } from 'react';
 
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import Navbar from "./navbar/navbar.js";
-import Login from "./login/login.js";
-import Dashboard from "./dashboard/dashboard.js";
-import Search from "./search/search.js";
-import Review from "./review/review.js";
-import AboutUs from "./about-us/about-us.js";
+import Navbar from './navbar/navbar.js';
+import Login from './login/login.js';
+import Dashboard from './dashboard/dashboard.js';
+import Search from './search/search.js';
+import Review from './review/review.js';
+import AboutUs from './about-us/about-us.js';
 
 export default class App extends Component {
   constructor(props) {
