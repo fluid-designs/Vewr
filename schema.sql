@@ -4,8 +4,7 @@ DROP TABLE users;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
-  username VARCHAR(255),
-  avatar_url TEXT
+  username VARCHAR(255)
 );
 
 CREATE TABLE movies (
@@ -22,7 +21,7 @@ CREATE TABLE reviews (
     review VARCHAR(1000),
     rating FLOAT,
     recommended BIT,
-    created_on DATE,
+    created_on BIGINT,
     user_id INTEGER NOT NULL,
     movie_id INTEGER NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users (id),
