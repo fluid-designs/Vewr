@@ -9,11 +9,12 @@
 @import "./components/review";
 @import "./components/login";
 @import "./components/dashboard";
+@import "./components/about-us";
 
 body {
-  color: aqua;
-  background-color: darkcyan;
-  font-family: "Open Sans", sans-serif;
+  color: $text-theme-1;
+  background-color: $background-theme-1;
+  font-family: $body-font-stack;
 }
 
 nav {
@@ -21,7 +22,7 @@ nav {
   justify-content: space-around;
   align-items: center;
   min-height: 10vh;
-  background: rgb(209, 216, 218);
+  background: $accent-theme-1;
 }
 
 nav > a {
@@ -45,6 +46,5 @@ nav > ul > a {
 #title-logo {
   font-size: 2em;
   font-family: "Audiowide", cursive;
-  // font-family: "Gugi", cursive;
 }
 

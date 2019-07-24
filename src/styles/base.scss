@@ -1,8 +1,8 @@
 * {box-sizing: border-box;}
 
 h1, h2, h3, h4, h5, h6 {
-  color: $heading-color; 
-  font-family: $heading-font;
+  color: $nav-theme-1; 
+  font-family: $heading-font-stack;
   margin: 20px 0;
 }
 
@@ -12,7 +12,7 @@ h3 {font-size: 18px}
 h4 {font-size: 16px}
 
 p {
-  color: $text-color; 
-  font-family: $body-copy-font;
+  color: $text-theme-1; 
+  font-family: $body-font-stack;
   margin: 15px 0;
 }
