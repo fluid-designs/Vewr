@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css?family=Audiowide&display=swap");
-@import url("https://fonts.googleapis.com/css?family=Gugi&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
 
 @import "variables";
@@ -10,6 +9,7 @@
 @import "./components/login";
 @import "./components/dashboard";
 @import "./components/about-us";
+@import "./components/navbar";
 
 body {
   color: $text-theme-1;
@@ -17,34 +17,7 @@ body {
   font-family: $body-font-stack;
 }
 
-nav {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  min-height: 10vh;
-  background: $accent-theme-1;
-}
 
-nav > a {
-  text-decoration: none;
-}
 
-nav > ul {
-  width: 50%;
-  display: flex;
-  justify-content: flex-end;
-  list-style-type: none;
-  flex-direction: row;
-}
 
-nav > ul > a {
-  margin-left: 10px;
-  margin-right: 10px;
-  text-decoration: none;
-}
-
-#title-logo {
-  font-size: 2em;
-  font-family: "Audiowide", cursive;
-}
 
