@@ -37,10 +37,11 @@ A simple web application that allows users to view and review their favorite mov
 * Whimsical (for wireframing)
 
 ## Authors
-* **Melfi Perez** 
+* **Matt Stuhring** 
 * **Brandon Hurrington** 
 * **Jane Hur** 
-* **Matt Stuhring** 
+* **Melfi Perez** 
+
 
 ## Versioning
 _July 2019:_ Version 1.0.0
