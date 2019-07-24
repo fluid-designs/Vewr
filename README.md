@@ -27,14 +27,14 @@ A simple web application that allows users to view and review their favorite mov
 ## Built With
 * React
 * JavaScript
-* HTML/CSS
+* HTML/CSS/SASS
 * Node
+* CORS
 * Express
 * Superagent
 * PostgreSQL
 * Heroku 
 * Whimsical (for wireframing)
-* SASS
 
 ## Authors
 * **Melfi Perez** 
