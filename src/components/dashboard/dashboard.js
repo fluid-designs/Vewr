@@ -3,21 +3,28 @@ import {Tabs, TabList, Tab, PanelList, Panel} from 'react-tabtab';
 import * as customStyle from 'react-tabtab/lib/themes/bootstrap';
 
 
-export default class Login extends Component{
+export default class Dashboard extends Component{
   constructor(props) {
     super(props);
 
     this.state = {
       userId: null,
       query: '',
-      activeIndex: 0
+      activeIndex: 0,
+      suggested: [],
+      reviewedMovies: []
     };
+    
+
   }
 
   // first function that is called what page is loaded
   // will get data first and then render component
   componentDidMount(){
     this.getUserId();
+
+    // GET data from server
+
   }
 
   getUserId = () =>{
@@ -51,6 +58,7 @@ export default class Login extends Component{
     return (
       <Fragment>
         <div id="dashboard" className="component-container">
+        <img className="profile-pic" src={`https://avatars.dicebear.com/v2/bottts/${this.state.userId}.svg`} />
           <h2>{`Welcome, ${this.state.userId}!!`}</h2>
 
           <div id="react-tab">

@@ -1,0 +1,70 @@
+$form-border-radius: 3px;
+
+form{
+	font: $body-font-stack;
+	max-width: 400px;
+	margin: 10px auto 0 auto;
+  padding: 16px; 
+}
+
+form input[type="text"],
+form input[type="date"],
+form input[type="datetime"],
+form input[type="email"],
+form input[type="number"],
+form input[type="search"],
+form input[type="time"],
+form input[type="url"],
+form textarea,
+form select 
+{
+	-webkit-transition: all 0.30s ease-in-out;
+	-moz-transition: all 0.30s ease-in-out;
+	-ms-transition: all 0.30s ease-in-out;
+	-o-transition: all 0.30s ease-in-out;
+	outline: none;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	border-radius: $form-border-radius;
+	background: #fff;
+	margin-bottom: 4%;
+	border: 1px solid #ccc;
+	padding: 3%;
+	color: #555;
+	font: $body-font-stack;
+}
+form input[type="text"]:focus,
+form input[type="date"]:focus,
+form input[type="datetime"]:focus,
+form input[type="email"]:focus,
+form input[type="number"]:focus,
+form input[type="search"]:focus,
+form input[type="time"]:focus,
+form input[type="url"]:focus,
+form textarea:focus,
+form select:focus
+{
+	box-shadow: 0 0 5px $primary-color;
+	padding: 3%;
+	border: 1px solid $primary-color;
+}
+
+form input[type="submit"],
+form input[type="button"], button{
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	padding: 3%;
+	background: $secondary-color;
+	border-bottom: 2px solid $primary-color;
+	border-top-style: none;
+	border-right-style: none;
+	border-left-style: none;	
+	color: #fff;
+	border-radius: $form-border-radius;
+}
+form input[type="submit"]:hover,
+form input[type="button"]:hover, button:hover{
+	background: #2EBC99;
+}
