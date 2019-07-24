@@ -1,6 +1,6 @@
 import React, { Fragment, Component } from "react";
-
-let userName = "Brutus";
+import {Tabs, TabList, Tab, PanelList, Panel} from 'react-tabtab';
+import * as customStyle from 'react-tabtab/lib/themes/bootstrap';
 
 
 export default class Login extends Component{
@@ -9,13 +9,13 @@ export default class Login extends Component{
 
     this.state = {
       userId: null,
-      query: ''
+      query: '',
+      activeIndex: 0
     };
   }
 
-  // component is ready for data
-  // first function that is called
-  // will get data and then will render
+  // first function that is called what page is loaded
+  // will get data first and then render component
   componentDidMount(){
     this.getUserId();
   }
@@ -43,28 +43,49 @@ export default class Login extends Component{
     this.props.history.push(`/search/${this.state.query}`);
   }
 
+  handleTabChange = index => {
+    this.setState({activeIndex: index});
+  }
+
   render(){
     return (
       <Fragment>
-        <div id="Dashboard" className="component-container">
-        <h2>{`Welcome, ${this.state.userId}!!`}</h2>
-  
-        <form onSubmit={this.handleSubmit}>
-        <input
-          type="text"
-          name="query"
-          value={this.state.query}
-          placeholder="Search for a movie"
-          onChange={this.handleChange}
-          required
-        />
-        <button type="submit">Search</button>
+        <div id="dashboard" className="component-container">
+          <h2>{`Welcome, ${this.state.userId}!!`}</h2>
 
-          <i className="fas fa-search fa-2x" />
-        </form>
+          <div id="react-tab">
+            <Tabs 
+              customStyle={customStyle} 
+              activeIndex={this.state.activeIndex} 
+              onTabChange={this.handleTabChange} 
+            >
+            <TabList className="tab-list">
+              <Tab><i className="far fa-thumbs-up"/> Suggestions</Tab>
+              <Tab><i className="fas fa-film"/> Movies</Tab>
+            </TabList>
+            <PanelList className="panel-list">
+              <Panel>List of suggested movies</Panel>
+              <Panel>Display movies that you have reviewed</Panel>
+            </PanelList>
+          </Tabs>
+          </div>
+          
+    
+          <form onSubmit={this.handleSubmit}>
+            <input
+              type="text"
+              name="query"
+              value={this.state.query}
+              placeholder="Search for a movie"
+              onChange={this.handleChange}
+              required
+            />
+            <button type="submit">
+              <i className="fas fa-search" />
+            </button>
+          </form>
         </div>
       </Fragment>
     );
   }
 }
-
