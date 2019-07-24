@@ -1,0 +1,67 @@
+.navbar {}
+
+nav {
+  color: $text-theme-1; 
+  font-family: $heading-font-stack;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 10vh;
+  background: $header-theme-1;
+}
+
+nav > link, nav > a {
+  color: $nav-text-theme-1; 
+  margin: .5em;
+  text-decoration: none;
+}
+
+nav link:visited, nav a:visited {
+  color: $nav-text-theme-1; 
+}
+
+nav > ul {
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+  list-style-type: none;
+  flex-direction: row;
+}
+
+nav > ul > a {
+  margin-left: .5em;
+  margin-right: .5em;
+  text-decoration: none;
+}
+
+#navbar-links li {
+  color: $nav-text-theme-1;
+  font-weight: bold;
+}
+
+#title-logo {
+      position: relative;
+      width: 7.5em;
+      height: 6.25em;
+      margin: .2em;
+      background: #0E2E3E;
+      border-radius: 50% / 10%;
+      color: $nav-text-theme-1;
+      line-height: 5em;
+      text-align: center;
+      text-indent: .1em;
+      text-shadow: -2px -2px 4px #00F7FF, 2px 2px 4px #00F7FF;
+}
+
+#title-logo:before {
+  font-size: 2em;
+  font-family: "Audiowide", cursive;
+  content: 'VEWR';
+  position: absolute;
+  top: 10%;
+  bottom: 10%;
+  right: -5%;
+  left: -5%;
+  background: inherit;
+  border-radius: 5% / 50%;
+}
