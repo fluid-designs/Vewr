@@ -1,0 +1,18 @@
+#dashboard {
+  color: #333;
+
+  #react-tab {
+    width: 90%;
+    margin: auto;
+  }
+
+  #react-tabtab-panel-0, #react-tabtab-panel-1 {
+    height: 300px;
+  }
+
+  form {
+    position:fixed;   
+    bottom:0;         
+    left:0;
+  }
+}
