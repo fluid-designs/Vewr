@@ -9,6 +9,7 @@ export default class Dashboard extends Component {
 
     this.state = {
       userId: null,
+      userName: '',
       query: '',
       activeIndex: 0,
       suggested: [],
@@ -19,44 +20,28 @@ export default class Dashboard extends Component {
   // first function that is called what page is loaded
   // will get data first and then render component
   // Gets suggestions data from server
-  componentDidMount() {
-    this.getUserId();
-    superagent
-      .get('/suggestions')
-      .then(result => {
-        this.setState({
-          suggested: result.body
-        });
-      })
-      .catch(error => {
-        console.log(error);
-      });
-
-    superagent
-      .get('/reviews')
-      .query({
-        data: JSON.parse(localStorage.getItem('userId'))
-      })
-      .then(result => {
-        this.setState({
-          reviews: result.body
-        });
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
-
-  getUserId = () => {
+  async componentDidMount() {
+    
     if (localStorage.getItem('userId')) {
-      //TODO will get user info to display
-      this.setState({
-        userId: JSON.parse(localStorage.getItem('userId'))
-      });
+      const userId = JSON.parse(localStorage.getItem('userId'));
+      try {
+        const suggestions = await superagent.get('/suggestions');
+        const reviews = await superagent.get('/reviews').query({data: userId});
+
+        this.setState({
+          reviews: reviews.body,
+          suggested: suggestions.body,
+          userId: JSON.parse(localStorage.getItem('userId')), 
+          userName: JSON.parse(localStorage.getItem('userName'))
+        })
+      } catch(err){
+        console.error(err)
+      }
+      
     } else {
       this.props.history.push('/');
     }
-  };
+  }
 
   handleChange = event => {
     this.setState({
@@ -80,7 +65,7 @@ export default class Dashboard extends Component {
         <div id="dashboard" className="component-container">
 
         <img className="profile-pic" src={`https://avatars.dicebear.com/v2/bottts/${this.state.userId}.svg`} alt="Profile" />
-          <h1>{`Welcome, ${this.state.userId}!!`}</h1>
+          <h1>{`Welcome, ${this.state.userName}!!`}</h1>
 
           <div id="react-tab">
             <Tabs

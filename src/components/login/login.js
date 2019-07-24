@@ -10,8 +10,9 @@ export default class Login extends Component {
     };
   }
 
-  saveUserId = id => {
-    localStorage.setItem('userId', JSON.stringify(id));
+  saveUserId = user => {
+    localStorage.setItem('userId', JSON.stringify(user.id));
+    localStorage.setItem('userName', JSON.stringify(user.username));
     // TODO save the ID from the backend to LS
   };
 
@@ -23,7 +24,7 @@ export default class Login extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    console.log('Username: ', this.state.username);
+    //console.log('Username: ', this.state.username);
 
     //login routing to connect to backend
     superagent
@@ -33,8 +34,8 @@ export default class Login extends Component {
       })
       .then(result => {
         console.log('result body: ', result.body);
-        this.saveUserId(result.body.id);
-        this.props.history.push('/dashboard');
+        this.saveUserId(result.body);
+        this.props.history.push("/dashboard");
       })
       .catch(err => {
         console.log(err);
