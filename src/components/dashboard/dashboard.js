@@ -31,6 +31,20 @@ export default class Dashboard extends Component {
       .catch(error => {
         console.log(error);
       });
+
+    superagent
+      .get('/reviews')
+      .query({
+        data: JSON.parse(localStorage.getItem('userId'))
+      })
+      .then(result => {
+        this.setState({
+          reviews: result.body
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   getUserId = () => {
