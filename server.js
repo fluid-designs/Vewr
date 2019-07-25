@@ -49,6 +49,27 @@ app.get('*', (req, res) => {
 // Ensures server is listening for requests
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
+
+// format time with AM or PM
+// https://stackoverflow.com/questions/8888491/how-do-you-display-javascript-datetime-in-12-hour-am-pm-format
+function formatAMPM(date) {
+  let hours = date.getHours();
+  let minutes = date.getMinutes();
+  let ampm = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12;
+  hours = hours ? hours : 12;
+  minutes = minutes < 10 ? '0'+minutes : minutes;
+  return hours + ':' + minutes + ' ' + ampm;
+}
+
+// Get the current date and time
+function getCurrentDateTime() {
+  let today = new Date();
+  let date = `${(today.getMonth() + 1)}/${today.getDate()}/${today.getFullYear()}`;
+
+  return `${date} ${formatAMPM(today)}`;
+}
+
 // Error Handling
 function handleError(err, result) {
   console.error(err);
@@ -156,7 +177,7 @@ function postUserReview(request, response) {
         request.body.review.text,
         request.body.review.rating,
         request.body.review.recommended,
-        Date.now(),
+        getCurrentDateTime(),
         parseInt(request.body.user_id),
         res.rows[0].id
       ];
