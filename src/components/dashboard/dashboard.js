@@ -59,6 +59,11 @@ export default class Dashboard extends Component {
     this.setState({ activeIndex: index });
   };
 
+  handleRecommended = review => {
+    //console.log(review);
+    return parseInt(review.recommended) === 1 ? <i className="far fa-thumbs-up"></i> : <i className="fas fa-thumbs-down"></i>;
+  };
+
   render() {
     return (
       <Fragment>
@@ -85,7 +90,7 @@ export default class Dashboard extends Component {
                 <ul className="suggested-list">
                   {this.state.suggested.map(movie => {
                     return <li key={movie.movie_id}>
-                    <div className="movie-poster"><Link to={`/review/${movie.movie_id}`}><img src={movie.image_url} /></Link></div>
+                    <div className="movie-poster"><Link to={`/review/${movie.movie_id}`}><img src={movie.image_url} alt={movie.title} /></Link></div>
                     <div>
                       <Link to={`/review/${movie.movie_id}`}>
                         <h3>{movie.title}</h3>
@@ -105,7 +110,7 @@ export default class Dashboard extends Component {
                     return <li key={review.id}>
                       <div className="review-poster">
                         <Link to={`/review/${review.movie_id}`}>
-                          <img src={review.image_url} />
+                          <img src={review.image_url} alt={review.title} />
                         </Link>
                       </div>
                       <div>
@@ -114,6 +119,8 @@ export default class Dashboard extends Component {
                         </Link>
                         <p>Review: {review.review}</p>
                         <p>Rating: {review.rating}</p>
+                        <p>Recommend: {this.handleRecommended(review)}</p>
+                        <p>Created: {Date(review.created_on)}</p>
                       </div>
                     </li>
                   })}

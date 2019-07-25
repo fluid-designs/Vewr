@@ -7,8 +7,9 @@ export default class Review extends Component {
     this.state = {
       movie_id: this.props.match.params.movie_id,
       movie: {},
-      review: '', 
-      rating: 1
+      review: '',
+      rating: 1, 
+      recommended: ''
     };
   }
 
@@ -47,7 +48,7 @@ export default class Review extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    
+
     // TODO Send post request to server which will save review into DB
     // Send an object which includes the user id, review, movie id, rating & recommend
     // Send movie details data movie_id, title, overview, released_on, image_url
@@ -64,7 +65,7 @@ export default class Review extends Component {
       review: {
         text: this.state.review,
         rating: this.state.rating,
-        recommended: '0'
+        recommended: this.state.recommended
       }
 
     };
@@ -82,36 +83,70 @@ export default class Review extends Component {
       });
   };
 
+  // thumbsUpOrDown('click', event) {
+  //   $('.like, .dislike').on('click', function() {
+  //     event.preventDefault();
+  //     $('.active').removeClass('active');
+  //     $(this).addClass('active');
+  //   });
+  // }
+
+  thumbsUp = () => {
+    this.setState({
+      recommended: 1
+      
+    });
+    //console.log('thumbs up', this.state.recommended)
+  };
+  thumbsDown = () => {
+    this.setState({
+      recommended: 0
+      
+    });
+    //console.log('thumbs down', this.state.recommended)
+  };
+
   render() {
     return (
       <Fragment>
         <div id="Review" className="component-container">
           <section className="movie-info">
-          <div className="movie-poster">
-                <img
-              src={this.state.movie.image_url}
-              alt={this.state.movie.title}/>
+            <div className="movie-poster">
+              <img
+                src={this.state.movie.image_url}
+                alt={this.state.movie.title} />
             </div>
             <div>
               <h1>{this.state.movie.title}</h1>
               <h4>Movie Synopsis: </h4>
               <p className="synopsis">{this.state.movie.synopsis}</p>
             </div>
-            
-            
+
+
           </section>
 
-          {/* TODO: Check if review already exists for this movie by the current user  */}
-
           <form onSubmit={this.handleSubmit} className="review-form">
-            <h2>Review Notes</h2>
+            <h2>Write your review</h2>
             <textarea
               rows="6"
               cols="45"
               value={this.state.review}
               onChange={this.handleChangeReview}
             />
-            <p>SLIDER GOES HERE</p>
+            <div className="thumbsUpOrDown">
+
+              <div className="rating">
+                {/* <!-- Thumbs up --> */}
+                <div className="like grow">
+                  <i onClick={this.thumbsUp} value='like' className="fa fa-thumbs-up fa-3x like" aria-hidden="true"></i>
+                </div>
+                {/* <!-- Thumbs down --> */}
+                <div className="dislike grow">
+                  <i onClick={this.thumbsDown} value='dislike'  className="fa fa-thumbs-down fa-3x like" aria-hidden="true"></i>
+                </div>
+              </div>
+
+            </div>
             <select
               value={this.state.rating}
               onChange={this.handleChangeRating}

@@ -64,6 +64,7 @@ export default class Login extends Component {
               <button type="submit">Submit</button>
             </div>
           </form>
+          <p>* If you don't have an account, no worries; upon logging in a new account will be created for you.</p>
         </div>
       </Fragment>
     );
