@@ -48,8 +48,7 @@ export default class Dashboard extends Component {
           suggested: suggestions.body,
           userId: JSON.parse(localStorage.getItem('userId')),
           userName: JSON.parse(localStorage.getItem('userName')),
-          newUser: JSON.parse(localStorage.getItem('newUser'))
-        })
+          newUser: JSON.parse(localStorage.getItem('newUser')),
           activeIndex: index,
           promiseIsResolved: true
         });
