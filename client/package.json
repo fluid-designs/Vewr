@@ -46,6 +46,5 @@
   "bugs": {
     "url": "https://github.com/fluid-designs/Vewr/issues"
   },
-  "homepage": "https://github.com/fluid-designs/Vewr#readme",
   "proxy": "http://localhost:5000"
 }
