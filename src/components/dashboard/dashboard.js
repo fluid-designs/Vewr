@@ -16,6 +16,8 @@ export default class Dashboard extends Component {
       suggested: [],
       reviewedMovies: []
     };
+
+    console.log(this.props)
   }
 
   // first function that is called what page is loaded
@@ -30,11 +32,19 @@ export default class Dashboard extends Component {
           .get('/reviews')
           .query({ data: userId });
 
+        let index;
+        if (this.props.match.params.tab) {
+          index = parseInt(this.props.match.params.tab);
+        } else {
+          index = 0;
+        }
+
         this.setState({
           reviewedMovies: reviews.body,
           suggested: suggestions.body,
           userId: JSON.parse(localStorage.getItem('userId')),
-          userName: JSON.parse(localStorage.getItem('userName'))
+          userName: JSON.parse(localStorage.getItem('userName')),
+          activeIndex: index
         });
       } catch (err) {
         console.error(err);
