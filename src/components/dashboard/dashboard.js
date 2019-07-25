@@ -95,7 +95,7 @@ export default class Dashboard extends Component {
                         <div className="movie-poster"><Link to={`/review/${movie.movie_id}`}><img src={movie.image_url} alt={movie.title} /></Link></div>
                         <div>
                           <Link to={`/review/${movie.movie_id}`}>
-                            <h3>{movie.title}</h3>
+                            <h3>{movie.title.toUpperCase()}</h3>
                           </Link>
                           <p className="synopsis">{movie.synopsis}</p>
                         </div>
@@ -116,12 +116,12 @@ export default class Dashboard extends Component {
                         </div>
                         <div>
                           <Link to={`/review/${review.movie_id}`}>
-                            <h3>{review.title}</h3>
+                            <h3>{review.title.toUpperCase()}</h3>
                           </Link>
                           <p>Review: {review.review}</p>
                           <p>Rating: {review.rating}</p>
                           <p>Recommend: {this.handleRecommended(review)}</p>
-                          <p>Created: {Date(review.created_on)}</p>
+                          <p>Created: {review.created_on}</p>
                         </div>
                       </li>
                     })}
