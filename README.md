@@ -1,5 +1,5 @@
 # Vewr
-A simple web application that allows users to view and review their favorite movies & TV Shows.
+A simple web application that allows users to view and review their favorite movies.
 
 ## User Stories 
 * As a user, I want to be able to view a list of movies.
@@ -36,6 +36,17 @@ A simple web application that allows users to view and review their favorite mov
 * Heroku 
 * Whimsical (for wireframing)
 
+## NPM Packages used
+* React-Toastify  https://www.npmjs.com/package/react-toastify
+* React-Burger-Menu  https://www.npmjs.com/package/react-burger-menu
+* React-tabtab https://www.npmjs.com/package/react-tabtab
+* Oath https://www.npmjs.com/package/oath
+
+## API's Used
+* Avatar Placeholder https://avatars.dicebear.com/
+* The Movie DB https://developers.themoviedb.org/3/search/search-movies
+* Twitter https://developer.twitter.com/en/docs.html
+
 ## Authors
 * **Matt Stuhring** 
 * **Jane Hur** 
@@ -48,8 +59,3 @@ _July 2019:_ Version 1.0.0
 
 ## License
 Please see License doc for more details. 
-
-
-
-
-
