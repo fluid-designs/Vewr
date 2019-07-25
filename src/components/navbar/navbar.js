@@ -7,22 +7,39 @@ export default class Navbar extends Component {
     super(props);
 
     this.state = {
-      auth: this.props.auth
+      auth: this.props.auth,
+      menuOpen: false
     };
+  }
+
+  // This keeps your state in sync with the opening/closing of the menu
+  handleStateChange(state) {
+    this.setState({ menuOpen: state.isOpen });
+  }
+
+  // This is being used to close the menu when a user clicks a menu item
+  closeMenu() {
+    this.setState({ menuOpen: false });
   }
 
   displayNavLinks = props => {
     if (localStorage.getItem('userId') || this.state.auth) {
       return (
-        <Menu right {...props}>
+        <Menu
+          isOpen={this.state.menuOpen}
+          onStateChange={state => this.handleStateChange(state)}
+          right
+          width={'200px'}
+          {...props}
+        >
           <ul id="navbar-links">
-            <Link to="/dashboard">
+            <Link onClick={() => this.closeMenu()} to="/dashboard">
               <li>Dashboard</li>
             </Link>
-            <Link to="/about-us">
+            <Link onClick={() => this.closeMenu()} to="/about-us">
               <li>About</li>
             </Link>
-            <Link to="/">
+            <Link onClick={() => this.closeMenu()} to="/">
               <li onClick={this.props.handleLogout}>Logout</li>
             </Link>
           </ul>
@@ -30,12 +47,18 @@ export default class Navbar extends Component {
       );
     } else {
       return (
-        <Menu right {...props}>
+        <Menu
+          isOpen={this.state.menuOpen}
+          onStateChange={state => this.handleStateChange(state)}
+          right
+          width={'200px'}
+          {...props}
+        >
           <ul id="navbar-links">
-            <Link to="/dashboard">
+            <Link onClick={() => this.closeMenu()} to="/dashboard">
               <li>Dashboard</li>
             </Link>
-            <Link to="/about-us">
+            <Link onClick={() => this.closeMenu()} to="/about-us">
               <li>About</li>
             </Link>
           </ul>
