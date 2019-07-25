@@ -14,7 +14,7 @@ export default class Navbar extends Component {
   displayNavLinks = props => {
     if (localStorage.getItem('userId') || this.state.auth) {
       return (
-        <Menu width={'200px'} {...props}>
+        <Menu right {...props}>
           <ul id="navbar-links">
             <Link to="/dashboard">
               <li>Dashboard</li>
@@ -30,7 +30,7 @@ export default class Navbar extends Component {
       );
     } else {
       return (
-        <Menu width={'200px'} {...props}>
+        <Menu right {...props}>
           <ul id="navbar-links">
             <Link to="/dashboard">
               <li>Dashboard</li>
