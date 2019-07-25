@@ -118,7 +118,7 @@ export default class Dashboard extends Component {
                           <p>Review: {review.review}</p>
                           <p>Rating: {review.rating}</p>
                           <p>Recommend: {this.handleRecommended(review)}</p>
-                          <p>Created: {Date(review.created_on)}</p>
+                          <p>Created: {review.created_on}</p>
                         </div>
                       </li>
                     })}

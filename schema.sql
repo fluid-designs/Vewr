@@ -17,13 +17,13 @@ CREATE TABLE movies (
 );
 
 CREATE TABLE reviews ( 
-    id SERIAL PRIMARY KEY,
-    review VARCHAR(1000),
-    rating FLOAT,
-    recommended BIT,
-    created_on BIGINT,
-    user_id INTEGER NOT NULL,
-    movie_id INTEGER NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users (id),
-    FOREIGN KEY (movie_id) REFERENCES movies (id)
-  );
+  id SERIAL PRIMARY KEY,
+  review VARCHAR(1000),
+  rating FLOAT,
+  recommended BIT,
+  created_on VARCHAR(255),
+  user_id INTEGER NOT NULL,
+  movie_id INTEGER NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users (id),
+  FOREIGN KEY (movie_id) REFERENCES movies (id)
+);
