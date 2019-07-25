@@ -1,7 +1,14 @@
 * {box-sizing: border-box;}
 
+body {
+  color: $primary-text-color;
+  background-color: $primary-background-color;
+  font-family: $body-font-stack;
+  line-height: 1.25;
+}
+
 h1, h2, h3, h4, h5, h6 {
-  color: $nav-text-theme-1; 
+  color: $primary-text-color; 
   font-family: $heading-font-stack;
   margin: 20px 0;
   font-weight: 700;
@@ -13,7 +20,7 @@ h3 {font-size: 1em}
 h4 {font-size: .75em}
 
 p {
-  color: $text-theme-1; 
+  color: $primary-text-color; 
   font-family: $body-font-stack;
   margin: .05em 0;
 }

@@ -1,23 +1,23 @@
 .navbar {}
 
 nav {
-  color: $text-theme-1; 
+  color: $primary-text-color; 
   font-family: $heading-font-stack;
   display: flex;
   justify-content: space-around;
   align-items: center;
   min-height: 10vh;
-  background: $header-theme-1;
+  background: $secondary-background-color;
 }
 
 nav > link, nav > a {
-  color: $nav-text-theme-1; 
+  color: $primary-text-color; 
   margin: .5em;
   text-decoration: none;
 }
 
 nav link:visited, nav a:visited {
-  color: $nav-text-theme-1; 
+  color: $primary-text-color; 
 }
 
 nav > ul {
@@ -35,7 +35,7 @@ nav > ul > a {
 }
 
 #navbar-links li {
-  color: $nav-text-theme-1;
+  color: $primary-text-color;
   font-weight: bold;
 }
 
@@ -46,11 +46,12 @@ nav > ul > a {
       margin: .2em;
       background: #0E2E3E;
       border-radius: 50% / 10%;
-      color: $nav-text-theme-1;
+      box-shadow: 1px 1px 6px 6px #00F7FF;
+      color: $secondary-text-color;
       line-height: 5em;
       text-align: center;
       text-indent: .1em;
-      text-shadow: -2px -2px 4px #00F7FF, 2px 2px 4px #00F7FF;
+      text-shadow: -1px -1px 5px #00F7FF, 1px 1px 5px #00F7FF;
 }
 
 #title-logo:before {
