@@ -1,5 +1,4 @@
 import React, { Fragment, Component } from "react";
-
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Navbar from "./navbar/navbar.js";
@@ -26,7 +25,6 @@ export default class App extends Component {
   handleLogin = () => {
     this.setState({auth: true });
   }
-  
 
   render() {
     return (
