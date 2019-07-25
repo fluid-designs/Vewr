@@ -1,16 +1,38 @@
 #dashboard {
-  color: $text-theme-1;
+  color: $primary-text-color;
   padding-bottom: 70px;
+  background-color: $primary-background-color;
+  font-family: $body-font-stack;
+  line-height: 1.25;
 
+  // React tab package requires weirdly precise CSS rules to target and manipulate the HTML elements.
   #react-tab {
     width: 100%;
     margin: auto;
-    border: .1em solid red;
-    background-color: rgb(63, 63, 63);
+    border: .1em solid $primary-text-color;
+    border-radius: .2em;
+  }
+
+  #react-tab > div > div > div {
+    background-color: $primary-accent-color;
+    border-bottom: none;
+  }
+
+  #react-tabtab-tab-0, #react-tabtab-tab-1 {
+    color: $primary-text-color;
+    background-color: $secondary-accent-color;
+  }
+
+  #react-tabtab-tab-0[aria-selected="true"], #react-tabtab-tab-1[aria-selected="true"] {
+    border: $primary-text-color solid 1px;
+  }
+
+  #react-tabtab-panel-0 > ul > li, #react-tabtab-panel-1 > ul > li {
+    background-color: $secondary-accent-color;
   }
 
   #react-tabtab-panel-0, #react-tabtab-panel-1 {
-
+    background-color: $primary-accent-color;
   }
 
   form {
@@ -18,7 +40,7 @@
     bottom:0;         
     left:0;
     text-align: center;
-    background-color: $accent-theme-1;
+    background-color: $secondary-background-color;
     padding: 10px;
     width: 100%;
   }
@@ -60,7 +82,7 @@
     li{
       display: flex;
       margin-bottom: 1.5em;
-      border: 1px solid blue;
+      border: 1px solid $primary-text-color;
       padding: 1em;
     }
     .movie-poster, .review-poster{

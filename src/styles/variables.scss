@@ -4,13 +4,14 @@ $body-font-stack: "Open Sans", sans-serif;
 
 $medium-font-size: .8em;
 $primary-color: rgb(15, 57, 102);
-$secondary-color: rgb(0, 130, 80);
 $light-background: #f0f0df;
 
-
 // Color Themes
-$background-theme-1:#48798A;
-$accent-theme-1:#3A3963;
-$header-theme-1:#2F6A84;
-$text-theme-1:#BBE6F5;
-$nav-text-theme-1: #272E46;
+// Dark Blue Theme
+$primary-background-color:#15202b;
+$secondary-background-color:#223344;
+$primary-accent-color:#2F6A84;
+$secondary-accent-color:#48798A;
+$primary-text-color:#BBE6F5;
+$secondary-text-color: #272E46;
+

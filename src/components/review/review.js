@@ -129,12 +129,14 @@ export default class Review extends Component {
           <form onSubmit={this.handleSubmit} className="review-form">
             <h2>Write your review</h2>
             <textarea
+              id="review-text-box"
               rows="6"
               cols="45"
               value={this.state.review}
               onChange={this.handleChangeReview}
               required
             />
+            <div> Would you recommend this film to your friends? </div>
             <div className="thumbsUpOrDown">
               <div className="rating">
                 {/* <!-- Thumbs up --> */}

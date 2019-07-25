@@ -1,12 +1,15 @@
 #login {
   margin-top: 4em;
   text-align: center;
+  color: $primary-text-color;
+  background-color: $primary-background-color;
+  font-family: $body-font-stack;
 
   body {
-  color: $text-theme-1;
-  background-color: $background-theme-1;
-  font-family: $body-font-stack;
-}
+    color: $primary-text-color;
+    background-color: $primary-background-color;
+    font-family: $body-font-stack;
+  }
 
   h1 {
     margin-bottom: 20px;
@@ -19,6 +22,10 @@
 
   form {
     max-width: 400px;
+  }
+
+  #username-entry {
+    background-color: $primary-accent-color;
   }
 
 }
