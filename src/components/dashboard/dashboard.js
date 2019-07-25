@@ -174,10 +174,10 @@ export default class Dashboard extends Component {
                         <p>Review: {review.review}</p>
                         <p>Rating: {review.rating}</p>
                         <p>Recommend: {this.handleRecommended(review)}</p>
-                        <p>Created: {review.created_on}</p>
+                        <span>Created: {review.created_on} <a href="" onClick={(event) => this.handleTweet(event, review)}>
+                            <i onClick={(event) => this.handleTweet(event, review)} className="fab fa-twitter"></i>
+                          </a></span>
                       </div>
-
-                      <a href="#" onClick={(event) => this.handleTweet(event, review)}><i className="fab fa-twitter"> Twitter</i></a>
                     </li>
                   })}
                 </ul>

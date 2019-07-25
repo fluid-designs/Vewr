@@ -68,22 +68,23 @@ function postTweet(request, response) {
     'HMAC-SHA1'
   );
 
-  var status = request.body.review;  // This is the tweet (ie status)
+  // This is the tweet (ie status)
+  var status = request.body.review;
 
   var postBody = {
     'status': status
   };
 
   oauth.post('https://api.twitter.com/1.1/statuses/update.json',
-    twitter_user_access_token,  // oauth_token (user access token)
-    twitter_user_secret,  // oauth_secret (user secret)
-    postBody,  // post body
-    '',  // post content type ?
+    twitter_user_access_token,
+    twitter_user_secret,
+    postBody,
+    '',
     function(err, data, res) {
       if (err) {
         console.log(err);
       } else {
-        // console.log(data);
+        response.status(200).send('Successful Tweet!');
       }
     });
 }
