@@ -1,6 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import { Link } from 'react-router-dom';
-import { bubble as Menu } from 'react-burger-menu';
+import { elastic as Menu } from 'react-burger-menu';
 
 export default class Navbar extends Component {
   constructor(props) {
@@ -14,7 +14,7 @@ export default class Navbar extends Component {
   displayNavLinks = props => {
     if (localStorage.getItem('userId') || this.state.auth) {
       return (
-        <Menu right {...props}>
+        <Menu width={'200px'} {...props}>
           <ul id="navbar-links">
             <Link to="/dashboard">
               <li>Dashboard</li>
@@ -30,14 +30,16 @@ export default class Navbar extends Component {
       );
     } else {
       return (
-        <ul id="navbar-links">
-          <Link to="/dashboard">
-            <li>Dashboard</li>
-          </Link>
-          <Link to="/about-us">
-            <li>About</li>
-          </Link>
-        </ul>
+        <Menu width={'200px'} {...props}>
+          <ul id="navbar-links">
+            <Link to="/dashboard">
+              <li>Dashboard</li>
+            </Link>
+            <Link to="/about-us">
+              <li>About</li>
+            </Link>
+          </ul>
+        </Menu>
       );
     }
   };
