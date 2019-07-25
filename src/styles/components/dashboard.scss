@@ -5,6 +5,18 @@
   font-family: $body-font-stack;
   line-height: 1.25;
 
+  span {
+    display: flex;
+  }
+
+  i.fa-twitter {
+    font-size: 27px;
+    position: relative;
+    bottom: 6px;
+    margin-left: 15px;
+    color: #00aced;
+  }
+
   // React tab package requires weirdly precise CSS rules to target and manipulate the HTML elements.
   #react-tab {
     width: 100%;
@@ -24,6 +36,13 @@
   #react-tabtab-tab-0, #react-tabtab-tab-1 {
     color: $primary-text-color;
     background-color: $quaternary-background-color;
+    padding: 10px 30px;
+  }
+
+  i.fa-thumbs-up, i.fa-film {
+    margin-right: 5px;
+    position: relative;
+    top: 2px;
   }
 
   // Tab manager tab boxes when highlighted.
