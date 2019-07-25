@@ -1,43 +1,33 @@
-// .navbar {}
+.navbar {
+}
 
-// nav {
-//   color: $primary-text-color;
-//   font-family: $heading-font-stack;
-//   display: flex;
-//   justify-content: space-around;
-//   align-items: center;
-//   min-height: 10vh;
-//   background: $secondary-background-color;
-// }
+nav {
+  color: $primary-text-color;
+  font-family: $heading-font-stack;
+}
 
-// nav > link, nav > a {
-//   color: $primary-text-color;
-//   margin: .5em;
-//   text-decoration: none;
-// }
+nav > link,
+nav > a {
+  color: $primary-text-color;
+  // margin: 0.5em;
+  text-decoration: none;
+}
 
-// nav link:visited, nav a:visited {
-//   color: $primary-text-color;
-// }
+nav link:visited,
+nav a:visited {
+  color: $primary-text-color;
+}
 
-// nav > ul {
-//   width: 50%;
-//   display: flex;
-//   justify-content: flex-end;
-//   list-style-type: none;
-//   flex-direction: row;
-// }
+nav > ul > a {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  text-decoration: none;
+}
 
-// nav > ul > a {
-//   margin-left: .5em;
-//   margin-right: .5em;
-//   text-decoration: none;
-// }
-
-// #navbar-links li {
-//   color: $primary-text-color;
-//   font-weight: bold;
-// }
+#navbar-links li {
+  color: $primary-text-color;
+  font-weight: bold;
+}
 
 #title-logo {
   position: relative;
@@ -75,7 +65,7 @@
   /* Our sidebar item styling */
   text-decoration: none;
   margin-bottom: 10px;
-  color: #d1d1d1;
+  color: $primary-text-color;
   transition: color 0.2s;
 }
 
@@ -83,8 +73,6 @@
 .bm-item:hover {
   color: white;
 }
-
-/* The rest copied directly from react-burger-menu docs */
 
 /* Position and sizing of burger button */
 .bm-burger-button {
@@ -97,7 +85,7 @@
 
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-  background: #373a47;
+  background: $secondary-background-color;
 }
 
 /* Position and sizing of clickable cross button */
@@ -113,14 +101,14 @@
 
 /* General sidebar styles */
 .bm-menu {
-  background: #373a47;
-  padding: 2.5em 1.5em 0;
+  background: $secondary-background-color;
+  padding: 2.5em 1.5em 5em;
   font-size: 1.15em;
 }
 
 /* Morph shape necessary with bubble or elastic */
 .bm-morph-shape {
-  fill: #373a47;
+  fill: $secondary-background-color;
 }
 
 /* Wrapper for item list */
