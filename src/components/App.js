@@ -35,7 +35,7 @@ export default class App extends Component {
           <Navbar auth={this.state.auth} handleLogout={this.handleLogout}/>
           <Switch>
             <Route exact path="/" render={(props) => <Login {...props} handleLogin={this.handleLogin}/>} />
-            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/dashboard/:tab?" component={Dashboard} />
             <Route path="/search/:query" component={Search} />
             <Route path="/review/:movie_id" component={Review} />
             <Route path="/about-us" component={AboutUs} />

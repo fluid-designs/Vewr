@@ -80,7 +80,7 @@ export default class Review extends Component {
       .send(data)
       .then(result => {
         //console.log(result.body);
-        this.props.history.push('/dashboard');
+        this.props.history.push('/dashboard/1');
       })
       .catch(err => {
         console.error(err);
