@@ -41,14 +41,15 @@
 
 #title-logo {
   position: relative;
+  display: inline-block;
   width: 7.5em;
-  height: 6.25em;
-  margin: 0.2em;
+  height: 5.25em;
+  margin: 1em 1.2em;
   background: #0e2e3e;
   border-radius: 50% / 10%;
   box-shadow: 1px 1px 6px 6px #00f7ff;
   color: $secondary-text-color;
-  line-height: 5em;
+  line-height: 4em;
   text-align: center;
   text-indent: 0.1em;
   text-shadow: -1px -1px 5px #00f7ff, 1px 1px 5px #00f7ff;
