@@ -25,11 +25,13 @@
   }
 
   .thumbsUpOrDown{
+    display: flex;
+    
     .rating {
-      display: inline-block;
+      // display: inline-block;
       width: 100%;
-      margin-top: 40px;
-      padding-top: 40px;
+      margin-top: 15px;
+      margin-bottom: 15px;
       text-align: center;
     }
     
@@ -39,17 +41,17 @@
       cursor: pointer;
       margin: 10px;
     }
-    
-    .dislike:hover,
-    .like:hover {
-      color: #2EBDD1;
-      transition: all .2s ease-in-out;
-      transform: scale(1.1);
+
+    .dislike {
+      transform: scaleX(-1);
+      -moz-transform: scaleX(-1);
+      -webkit-transform: scaleX(-1);
+      -ms-transform: scaleX(-1);
     }
     
     .active {
       color: #2EBDD1;
+      transform: scale(1.2);
     }
   }
-  
 }
