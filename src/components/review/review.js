@@ -8,7 +8,7 @@ export default class Review extends Component {
       movie_id: this.props.match.params.movie_id,
       movie: {},
       review: '',
-      rating: 1, 
+      rating: 1,
       recommended: '',
       active: {
         like: "",
@@ -119,8 +119,8 @@ export default class Review extends Component {
             </div>
             <div>
               <h1>{this.state.movie.title}</h1>
-              <h4>Movie Synopsis: </h4>
-              <p className="synopsis">{this.state.movie.synopsis}</p>
+              <h4>{"Movie Synopsis: ".toUpperCase()}</h4>
+              <p id="synopsis">{this.state.movie.synopsis}</p>
             </div>
 
 
@@ -149,7 +149,7 @@ export default class Review extends Component {
                 </div>
               </div>
             </div>
-            
+
             <select
               value={this.state.rating}
               onChange={this.handleChangeRating}

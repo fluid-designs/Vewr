@@ -7,9 +7,12 @@
     .movie-poster {
       margin-right: 1.5em; 
     }
-    .synopsis {
+    #synopsis {
       text-align: left;
       font-size: .8em;
+      padding: .4em;
+      background-color: $secondary-accent-color;
+      border-radius: .2em;
     }
 
     h1, h2, h3, h4 {
@@ -21,7 +24,9 @@
   }
 
   #review-text-box {
-    background-color: $secondary-accent-color;
+    color: $primary-text-color;
+    background-color: $tertiary-background-color;
+    border: $primary-border-color 2px solid;
   }
 
   .thumbsUpOrDown{

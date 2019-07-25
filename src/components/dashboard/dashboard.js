@@ -122,24 +122,22 @@ export default class Dashboard extends Component {
                   <h2>Reviewed Movies</h2>
                   <ul className="movie-list">
                     {this.state.reviewedMovies.map(review => {
-                      return (
-                        <li key={review.id}>
-                          <div className="review-poster">
-                            <Link to={`/review/${review.movie_id}`}>
-                              <img src={review.image_url} alt={review.title} />
-                            </Link>
-                          </div>
-                          <div>
-                            <Link to={`/review/${review.movie_id}`}>
-                              <h3>{review.title}</h3>
-                            </Link>
-                            <p>Review: {review.review}</p>
-                            <p>Rating: {review.rating}</p>
-                            <p>Recommend: {this.handleRecommended(review)}</p>
-                            <p>Created: {Date(review.created_on)}</p>
-                          </div>
-                        </li>
-                      );
+                      return <li key={review.id}>
+                        <div className="review-poster">
+                          <Link to={`/review/${review.movie_id}`}>
+                            <img src={review.image_url} alt={review.title} />
+                          </Link>
+                        </div>
+                        <div>
+                          <Link to={`/review/${review.movie_id}`}>
+                            <h3>{review.title.toUpperCase()}</h3>
+                          </Link>
+                          <p>Review: {review.review}</p>
+                          <p>Rating: {review.rating}</p>
+                          <p>Recommend: {this.handleRecommended(review)}</p>
+                          <p>Created: {review.created_on}</p>
+                        </div>
+                      </li>
                     })}
                   </ul>
                 </Panel>
