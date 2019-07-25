@@ -1,36 +1,26 @@
-.navbar {}
-
-nav {
-  color: $primary-text-color; 
-  font-family: $heading-font-stack;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  min-height: 10vh;
-  background: $secondary-background-color;
+.navbar {
 }
 
-nav > link, nav > a {
-  color: $primary-text-color; 
-  margin: .5em;
+nav {
+  color: $primary-text-color;
+  font-family: $heading-font-stack;
+}
+
+nav > link,
+nav > a {
+  color: $primary-text-color;
+  // margin: 0.5em;
   text-decoration: none;
 }
 
-nav link:visited, nav a:visited {
-  color: $primary-text-color; 
-}
-
-nav > ul {
-  width: 50%;
-  display: flex;
-  justify-content: flex-end;
-  list-style-type: none;
-  flex-direction: row;
+nav link:visited,
+nav a:visited {
+  color: $primary-text-color;
 }
 
 nav > ul > a {
-  margin-left: .5em;
-  margin-right: .5em;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
   text-decoration: none;
 }
 
@@ -40,23 +30,24 @@ nav > ul > a {
 }
 
 #title-logo {
-      position: relative;
-      width: 7.5em;
-      height: 6.25em;
-      margin: .2em;
-      background: #0E2E3E;
-      border-radius: 50% / 10%;
-      box-shadow: 1px 1px 6px 6px #00F7FF;
-      color: $secondary-text-color;
-      line-height: 5em;
-      text-align: center;
-      text-indent: .1em;
-      text-shadow: -1px -1px 5px #00F7FF, 1px 1px 5px #00F7FF;
+  position: relative;
+  display: inline-block;
+  width: 7.5em;
+  height: 5.25em;
+  margin: 1em 1.2em;
+  background: #0e2e3e;
+  border-radius: 50% / 10%;
+  box-shadow: 1px 1px 6px 6px #00f7ff;
+  color: $secondary-text-color;
+  line-height: 4em;
+  text-align: center;
+  text-indent: 0.1em;
+  text-shadow: -1px -1px 5px #00f7ff, 1px 1px 5px #00f7ff;
 }
 
 #title-logo:before {
   font-size: 2em;
-  font-family: "Audiowide", cursive;
+  font-family: 'Audiowide', cursive;
   content: 'VEWR';
   position: absolute;
   top: 10%;
@@ -65,4 +56,67 @@ nav > ul > a {
   left: -5%;
   background: inherit;
   border-radius: 5% / 50%;
+}
+
+/* Individual item */
+.bm-item {
+  display: inline-block;
+
+  /* Our sidebar item styling */
+  text-decoration: none;
+  margin-bottom: 10px;
+  color: $primary-text-color;
+  transition: color 0.2s;
+}
+
+/* Change color on hover */
+.bm-item:hover {
+  color: white;
+}
+
+/* Position and sizing of burger button */
+.bm-burger-button {
+  position: absolute;
+  width: 36px;
+  height: 30px;
+  right: 5%;
+  top: 5%;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: $secondary-background-color;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: #bdc3c7;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background: $secondary-background-color;
+  padding: 2.5em 1.5em 5em;
+  font-size: 1.15em;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: $secondary-background-color;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  color: #b8b7ad;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.3);
 }

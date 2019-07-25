@@ -88,7 +88,6 @@ export default class Review extends Component {
         setTimeout(()=>{
           this.props.history.push('/dashboard');
         }, 1500)
-        
       })
       .catch(err => {
         console.error(err);

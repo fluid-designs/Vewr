@@ -1,5 +1,4 @@
 import React, { Fragment, Component } from "react";
-
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Navbar from "./navbar/navbar.js";
@@ -26,7 +25,6 @@ export default class App extends Component {
   handleLogin = () => {
     this.setState({auth: true });
   }
-  
 
   render() {
     return (
@@ -35,7 +33,7 @@ export default class App extends Component {
           <Navbar auth={this.state.auth} handleLogout={this.handleLogout}/>
           <Switch>
             <Route exact path="/" render={(props) => <Login {...props} handleLogin={this.handleLogin}/>} />
-            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/dashboard/:tab?" component={Dashboard} />
             <Route path="/search/:query" component={Search} />
             <Route path="/review/:movie_id" component={Review} />
             <Route path="/about-us" component={AboutUs} />
