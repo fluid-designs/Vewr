@@ -7,6 +7,7 @@ const pg = require('pg');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
+var OAuth = require('oauth');
 
 require('dotenv').config();
 
@@ -39,6 +40,7 @@ app.post('/review', postUserReview);
 app.get('/login', getUser);
 app.get('/suggestions', getSuggestions);
 app.get('/reviews', getUserReviews);
+app.post('/tweet', postTweet);
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
@@ -49,6 +51,42 @@ app.get('*', (req, res) => {
 // Ensures server is listening for requests
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
+// https://gist.github.com/jaredpalmer/138f17a142d2d8770a1d752b0e00bd31
+function postTweet(request, response) {
+  var twitter_application_consumer_key = process.env.TWITTER_API_KEY;  // API Key
+  var twitter_application_secret = process.env.TWITTER_API_SECRET;  // API Secret
+  var twitter_user_access_token = process.env.TWITTER_ACCESS_TOKEN;  // Access Token
+  var twitter_user_secret = process.env.TWITTER_ACCESS_TOKEN_SECRET;  // Access Token Secret
+
+  var oauth = new OAuth.OAuth(
+    'https://api.twitter.com/oauth/request_token',
+    'https://api.twitter.com/oauth/access_token',
+    twitter_application_consumer_key,
+    twitter_application_secret,
+    '1.0A',
+    null,
+    'HMAC-SHA1'
+  );
+
+  var status = request.body.review;  // This is the tweet (ie status)
+
+  var postBody = {
+    'status': status
+  };
+
+  oauth.post('https://api.twitter.com/1.1/statuses/update.json',
+    twitter_user_access_token,  // oauth_token (user access token)
+    twitter_user_secret,  // oauth_secret (user secret)
+    postBody,  // post body
+    '',  // post content type ?
+    function(err, data, res) {
+      if (err) {
+        console.log(err);
+      } else {
+        // console.log(data);
+      }
+    });
+}
 
 // format time with AM or PM
 // https://stackoverflow.com/questions/8888491/how-do-you-display-javascript-datetime-in-12-hour-am-pm-format

@@ -84,6 +84,27 @@ export default class Dashboard extends Component {
     );
   };
 
+  handleTweet = (event, movieReview) => {
+    event.preventDefault();
+    console.log('movieReview: ', movieReview);
+    let tweetBody =
+    `Created On:${movieReview.created_on}
+    Movie Title: ${movieReview.title}
+    Rating:${movieReview.rating}
+    Recommended:${movieReview.recommended}
+    Review:${movieReview.review}`;
+
+    superagent.post("/tweet")
+    .set('Content-Type', 'application/json')
+    .send({review: tweetBody})
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => {
+      console.error(err);
+    })
+  };
+
   render() {
     const waitForAsync = () => {
       if (!this.state.promiseIsResolved) {
@@ -155,6 +176,8 @@ export default class Dashboard extends Component {
                         <p>Recommend: {this.handleRecommended(review)}</p>
                         <p>Created: {review.created_on}</p>
                       </div>
+
+                      <a href="#" onClick={(event) => this.handleTweet(event, review)}><i className="fab fa-twitter"> Twitter</i></a>
                     </li>
                   })}
                 </ul>
