@@ -2,7 +2,9 @@ import React, { Fragment, Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Tabs, TabList, Tab, PanelList, Panel } from 'react-tabtab';
 import * as customStyle from 'react-tabtab/lib/themes/bootstrap';
+import Welcome from '../toasts/welcome.js';
 import superagent from 'superagent';
+
 
 export default class Dashboard extends Component {
   constructor(props) {
@@ -67,6 +69,7 @@ export default class Dashboard extends Component {
   render() {
     return (
       <Fragment>
+        <Welcome />
         <div id="dashboard" className="component-container">
 
           <img className="profile-pic" src={`https://avatars.dicebear.com/v2/bottts/${this.state.userId}.svg`} alt="Profile" />

@@ -109,6 +109,7 @@ export default class Review extends Component {
 
   render() {
     return (
+      
       <Fragment>
         <div id="Review" className="component-container">
           <section className="movie-info">
