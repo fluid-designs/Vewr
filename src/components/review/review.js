@@ -50,13 +50,13 @@ export default class Review extends Component {
   };
 
   handleChangeRating = event => {
-    this.notify();
     this.setState({
       rating: event.target.value
     });
   };
 
   handleSubmit = event => {
+    this.notify();
     event.preventDefault();
 
     // TODO Send post request to server which will save review into DB
@@ -171,7 +171,7 @@ export default class Review extends Component {
               <option value="10">10</option>
             </select><br /><br />
             
-            <button type="submit" onClick={this.notify}>Save your review</button>
+            <button type="submit" >Save your review</button>
             <ToastContainer />
           </form>
         </div>
