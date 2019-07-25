@@ -33,8 +33,9 @@ export default class Login extends Component {
         data: this.state.username
       })
       .then(result => {
-        console.log('result body: ', result.body);
         this.saveUserId(result.body);
+
+        this.props.handleLogin();
         this.props.history.push("/dashboard");
       })
       .catch(err => {
