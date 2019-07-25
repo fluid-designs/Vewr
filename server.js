@@ -207,13 +207,13 @@ function getUser(request, response) {
         client
           .query(userInsertSQL, userInsertValues)
           .then(res => {
-            response.send(res.rows[0]);
+            response.send([res.rows[0], true]);
           })
           .catch(err => {
             console.log(err);
           });
       } else {
-        response.send(res.rows[0]);
+        response.send([res.rows[0], false]);
       }
     })
     .catch(e => console.error(e.stack));

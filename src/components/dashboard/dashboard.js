@@ -2,7 +2,9 @@ import React, { Fragment, Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Tabs, TabList, Tab, PanelList, Panel } from 'react-tabtab';
 import * as customStyle from 'react-tabtab/lib/themes/bootstrap';
+import Welcome from '../toasts/welcome.js';
 import superagent from 'superagent';
+
 
 export default class Dashboard extends Component {
   constructor(props) {
@@ -11,6 +13,7 @@ export default class Dashboard extends Component {
     this.state = {
       userId: null,
       userName: '',
+      newUser:'',
       query: '',
       activeIndex: 0,
       suggested: [],
@@ -45,6 +48,8 @@ export default class Dashboard extends Component {
           suggested: suggestions.body,
           userId: JSON.parse(localStorage.getItem('userId')),
           userName: JSON.parse(localStorage.getItem('userName')),
+          newUser: JSON.parse(localStorage.getItem('newUser'))
+        })
           activeIndex: index,
           promiseIsResolved: true
         });

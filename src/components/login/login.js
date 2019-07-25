@@ -11,8 +11,9 @@ export default class Login extends Component {
   }
 
   saveUserId = user => {
-    localStorage.setItem('userId', JSON.stringify(user.id));
-    localStorage.setItem('userName', JSON.stringify(user.username));
+    localStorage.setItem('userId', JSON.stringify(user[0].id));
+    localStorage.setItem('userName', JSON.stringify(user[0].username));
+    localStorage.setItem('newUser', JSON.stringify(user[1]));
     // TODO save the ID from the backend to LS
   };
 
