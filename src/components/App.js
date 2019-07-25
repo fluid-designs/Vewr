@@ -13,16 +13,28 @@ export default class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      auth: false
+    };
   }
+
+  handleLogout = () => {
+    localStorage.clear();
+    this.setState({auth: false}); 
+  }
+
+  handleLogin = () => {
+    this.setState({auth: true });
+  }
+  
 
   render() {
     return (
       <Router>
         <Fragment>
-          <Navbar />
+          <Navbar auth={this.state.auth} handleLogout={this.handleLogout}/>
           <Switch>
-            <Route exact path="/" component={Login} />
+            <Route exact path="/" render={(props) => <Login {...props} handleLogin={this.handleLogin}/>} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/search/:query" component={Search} />
             <Route path="/review/:movie_id" component={Review} />
