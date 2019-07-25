@@ -13,6 +13,7 @@ export default class Dashboard extends Component {
     this.state = {
       userId: null,
       userName: '',
+      newUser:'',
       query: '',
       activeIndex: 0,
       suggested: [],
@@ -35,7 +36,8 @@ export default class Dashboard extends Component {
           reviewedMovies: reviews.body,
           suggested: suggestions.body,
           userId: JSON.parse(localStorage.getItem('userId')),
-          userName: JSON.parse(localStorage.getItem('userName'))
+          userName: JSON.parse(localStorage.getItem('userName')),
+          newUser: JSON.parse(localStorage.getItem('newUser'))
         })
       } catch (err) {
         console.error(err)
@@ -69,7 +71,6 @@ export default class Dashboard extends Component {
   render() {
     return (
       <Fragment>
-        <Welcome />
         <div id="dashboard" className="component-container">
 
           <img className="profile-pic" src={`https://avatars.dicebear.com/v2/bottts/${this.state.userId}.svg`} alt="Profile" />

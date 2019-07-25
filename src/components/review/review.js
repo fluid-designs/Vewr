@@ -1,7 +1,12 @@
 import React, { Fragment, Component } from 'react';
 import superagent from 'superagent';
+import { ToastContainer, toast } from 'react-toastify';
+
 
 export default class Review extends Component {
+
+  notify = () => toast("Thanks for your review!", {autoClose: 1500, position: "top-center"})
+
   constructor(props) {
     super(props);
     this.state = {
@@ -13,10 +18,11 @@ export default class Review extends Component {
       active: {
         like: "",
         dislike: ""
-      }
+      },
+      redirect: false
     };
   }
-
+  
   componentDidMount() {
     // Make a http get request using superagent
     // Save response into state as movie object
@@ -28,7 +34,6 @@ export default class Review extends Component {
         url: 'search'
       })
       .then(result => {
-        //console.log(result.body);
         this.setState({
           movie: result.body
         });
@@ -45,6 +50,7 @@ export default class Review extends Component {
   };
 
   handleChangeRating = event => {
+    this.notify();
     this.setState({
       rating: event.target.value
     });
@@ -71,7 +77,7 @@ export default class Review extends Component {
         rating: this.state.rating,
         recommended: this.state.recommended
       }
-
+      
     };
     console.log('data', data);
     superagent
@@ -79,8 +85,10 @@ export default class Review extends Component {
       .set('Content-Type', 'application/json')
       .send(data)
       .then(result => {
-        //console.log(result.body);
-        this.props.history.push('/dashboard');
+        setTimeout(()=>{
+          this.props.history.push('/dashboard');
+        }, 1500)
+        
       })
       .catch(err => {
         console.error(err);
@@ -106,7 +114,6 @@ export default class Review extends Component {
       }
     });
   };
-
   render() {
     return (
       
@@ -123,8 +130,6 @@ export default class Review extends Component {
               <h4>{"Movie Synopsis: ".toUpperCase()}</h4>
               <p id="synopsis">{this.state.movie.synopsis}</p>
             </div>
-
-
           </section>
 
           <form onSubmit={this.handleSubmit} className="review-form">
@@ -166,7 +171,9 @@ export default class Review extends Component {
               <option value="9">9</option>
               <option value="10">10</option>
             </select><br /><br />
-            <button type="submit">Save your review</button>
+            
+            <button type="submit" onClick={this.notify}>Save your review</button>
+            <ToastContainer />
           </form>
         </div>
       </Fragment>

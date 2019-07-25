@@ -3,18 +3,24 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-
-
 export default class WelcomeToast extends Component {
-  
-  notify = () => toast("Welcome!", { autoClose: 2000, position: "top-center" });
+
+  notify = () => {
+    if (this.props.newUser){
+      toast('Welcome! A new user account has been created for you.', { autoClose: 2000, position: "top-center" });
+    } else {
+      toast('Welcome back!', {autoClose: 2000, position: "top-center"});
+    }
+  }
 
   render(){
+    
     return (
-      <div>
-        <button onClick={this.notify}>Welcome!</button>
+      
+      <Fragment>
+        {this.notify()}
         <ToastContainer />
-      </div>
+      </Fragment>
     );
   }
 }
