@@ -5,10 +5,12 @@
   #react-tab {
     width: 100%;
     margin: auto;
+    border: .1em solid red;
+    background-color: rgb(63, 63, 63);
   }
 
   #react-tabtab-panel-0, #react-tabtab-panel-1 {
-    height: 300px;
+
   }
 
   form {
@@ -45,5 +47,29 @@
     font-weight: 700;
     font-size: 1em; 
   }
-
+  .suggested-list, .movie-list {
+    margin-top: 1.5em; 
+    img {
+      width: 80px;
+    }
+    .synopsis{
+      font-size: $medium-font-size;
+      float: left;
+      text-align: left;
+    }
+    li{
+      display: flex;
+      margin-bottom: 1.5em;
+      border: 1px solid blue;
+      padding: 1em;
+    }
+    .movie-poster, .review-poster{
+      margin-right: 1em;
+    }
+    h3 {
+      margin-top: 0;
+      margin-bottom: 0;
+      text-align: left;
+    }
+  } 
 }
