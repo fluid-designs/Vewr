@@ -9,7 +9,11 @@ export default class Review extends Component {
       movie: {},
       review: '',
       rating: 1, 
-      recommended: ''
+      recommended: '',
+      active: {
+        like: "",
+        dislike: ""
+      }
     };
   }
 
@@ -83,27 +87,24 @@ export default class Review extends Component {
       });
   };
 
-  // thumbsUpOrDown('click', event) {
-  //   $('.like, .dislike').on('click', function() {
-  //     event.preventDefault();
-  //     $('.active').removeClass('active');
-  //     $(this).addClass('active');
-  //   });
-  // }
-
   thumbsUp = () => {
     this.setState({
-      recommended: 1
-      
+      recommended: 1,
+      active: {
+        like: "active",
+        dislike: ""
+      }
     });
-    //console.log('thumbs up', this.state.recommended)
   };
+
   thumbsDown = () => {
     this.setState({
-      recommended: 0
-      
+      recommended: 0,
+      active: {
+        like: "",
+        dislike: "active"
+      }
     });
-    //console.log('thumbs down', this.state.recommended)
   };
 
   render() {
@@ -135,19 +136,18 @@ export default class Review extends Component {
               required
             />
             <div className="thumbsUpOrDown">
-
               <div className="rating">
                 {/* <!-- Thumbs up --> */}
                 <div className="like grow">
-                  <i onClick={this.thumbsUp} value='like' className="fa fa-thumbs-up fa-3x like" aria-hidden="true"></i>
+                  <i onClick={this.thumbsUp} className={`fa fa-thumbs-up fa-3x like ${this.state.active.like}`} aria-hidden="true"></i>
                 </div>
                 {/* <!-- Thumbs down --> */}
                 <div className="dislike grow">
-                  <i onClick={this.thumbsDown} value='dislike'  className="fa fa-thumbs-down fa-3x like" aria-hidden="true"></i>
+                  <i onClick={this.thumbsDown} className={`fa fa-thumbs-down fa-3x like ${this.state.active.dislike}`} aria-hidden="true"></i>
                 </div>
               </div>
-
             </div>
+            
             <select
               value={this.state.rating}
               onChange={this.handleChangeRating}
