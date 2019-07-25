@@ -9,7 +9,6 @@ nav {
 nav > link,
 nav > a {
   color: $primary-text-color;
-  // margin: 0.5em;
   text-decoration: none;
 }
 
@@ -27,6 +26,11 @@ nav > ul > a {
 #navbar-links li {
   color: $primary-text-color;
   font-weight: bold;
+}
+
+#navbar-links:focus {
+  border: none;
+  outline: none;
 }
 
 #title-logo {
@@ -101,14 +105,14 @@ nav > ul > a {
 
 /* General sidebar styles */
 .bm-menu {
-  background: $secondary-background-color;
+  background: $tertiary-background-color;
   padding: 2.5em 1.5em 5em;
   font-size: 1.15em;
 }
 
 /* Morph shape necessary with bubble or elastic */
 .bm-morph-shape {
-  fill: $secondary-background-color;
+  fill: $tertiary-background-color;
 }
 
 /* Wrapper for item list */
