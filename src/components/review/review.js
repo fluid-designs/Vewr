@@ -132,6 +132,7 @@ export default class Review extends Component {
               cols="45"
               value={this.state.review}
               onChange={this.handleChangeReview}
+              required
             />
             <div className="thumbsUpOrDown">
 
