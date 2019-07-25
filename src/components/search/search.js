@@ -10,13 +10,13 @@ export default class Search extends Component{
     //console.log(this.props.match.params.query)
     this.state = {
       query: this.props.match.params.query,
-      movies: []
+      movies: [],
+      promiseIsResolved: false
     };
   }
 
   componentDidMount(){
     // make request off of query parameter being passed from dashboard.js
-    
     superagent
       .get('/movies')
       .query({
@@ -24,9 +24,10 @@ export default class Search extends Component{
         url: 'movies'
       })
       .then(result => {
-        //console.log(result.body);
+        console.log(result.body);
          this.setState({
-          movies: result.body
+          movies: result.body,
+          promiseIsResolved: true
         })
       })
       .catch(err => {
@@ -35,11 +36,21 @@ export default class Search extends Component{
   }
 
   render(){
-    return (
-      <Fragment>
-        <div id="Search" className="component-container">
-          <h1>Search results</h1>
-          <ul className="movie-list">
+
+    const waitForAsync = () => {
+      if (!this.state.promiseIsResolved) {
+        return null;
+      } else {
+        if (this.state.movies.length === 0) {
+          return <div>
+            <p>Sorry no movies were found.</p>
+            <Link to="/dashboard">
+              Please Try again.
+            </Link>
+          </div>
+          
+        } else {
+          return <ul className="movie-list">
             {this.state.movies.map(movie => {
               return <li key={movie.movie_id}>
               <div className="movie-poster"><Link to={`/review/${movie.movie_id}`}><img src={movie.image_url} alt={movie.title} /></Link></div>
@@ -52,6 +63,15 @@ export default class Search extends Component{
               </li>
             })}
           </ul>
+        }
+      }
+    }
+
+    return (
+      <Fragment>
+        <div id="Search" className="component-container">
+          <h1>Search results</h1>
+          {waitForAsync()}
         </div>
       </Fragment>
     );
