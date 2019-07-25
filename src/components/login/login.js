@@ -51,6 +51,7 @@ export default class Login extends Component {
           <form onSubmit={this.handleSubmit}>
             <div>
               <input
+                id="username-entry"
                 type="text"
                 name="username"
                 value={this.state.username}

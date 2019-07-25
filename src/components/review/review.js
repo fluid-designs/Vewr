@@ -8,7 +8,7 @@ export default class Review extends Component {
       movie_id: this.props.match.params.movie_id,
       movie: {},
       review: '',
-      rating: 1, 
+      rating: 1,
       recommended: ''
     };
   }
@@ -94,14 +94,14 @@ export default class Review extends Component {
   thumbsUp = () => {
     this.setState({
       recommended: 1
-      
+
     });
     //console.log('thumbs up', this.state.recommended)
   };
   thumbsDown = () => {
     this.setState({
       recommended: 0
-      
+
     });
     //console.log('thumbs down', this.state.recommended)
   };
@@ -128,11 +128,13 @@ export default class Review extends Component {
           <form onSubmit={this.handleSubmit} className="review-form">
             <h2>Write your review</h2>
             <textarea
+              id="review-text-box"
               rows="6"
               cols="45"
               value={this.state.review}
               onChange={this.handleChangeReview}
             />
+            <div> Would you recommend this film to your friends? </div>
             <div className="thumbsUpOrDown">
 
               <div className="rating">
@@ -142,7 +144,7 @@ export default class Review extends Component {
                 </div>
                 {/* <!-- Thumbs down --> */}
                 <div className="dislike grow">
-                  <i onClick={this.thumbsDown} value='dislike'  className="fa fa-thumbs-down fa-3x like" aria-hidden="true"></i>
+                  <i onClick={this.thumbsDown} value='dislike' className="fa fa-thumbs-down fa-3x like" aria-hidden="true"></i>
                 </div>
               </div>
 
