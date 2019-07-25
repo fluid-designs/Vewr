@@ -86,7 +86,7 @@ export default class Review extends Component {
       .send(data)
       .then(result => {
         setTimeout(()=>{
-          this.props.history.push('/dashboard');
+          this.props.history.push('/dashboard/1');
         }, 1500)
       })
       .catch(err => {
