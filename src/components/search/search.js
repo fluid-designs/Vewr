@@ -1,6 +1,7 @@
-import React, { Fragment, Component } from 'react';
-import { Link } from 'react-router-dom';
-import superagent from 'superagent';
+
+import React, { Fragment, Component } from "react";
+import { Link } from "react-router-dom";
+import superagent from "superagent";
 
 require('dotenv').config();
 
@@ -39,34 +40,27 @@ export default class Search extends Component {
         return null;
       } else {
         if (this.state.movies.length === 0) {
-          return (
-            <div>
-              <p>Sorry no movies were found.</p>
-              <Link to="/dashboard">Please Try again.</Link>
-            </div>
-          );
+          return <div>
+            <p>Sorry no movies were found.</p>
+            <Link to="/dashboard">
+              Please Try again.
+            </Link>
+          </div>
+
         } else {
-          return (
-            <ul className="movie-list">
-              {this.state.movies.map(movie => {
-                return (
-                  <li key={movie.movie_id}>
-                    <div className="movie-poster">
-                      <Link to={`/review/${movie.movie_id}`}>
-                        <img src={movie.image_url} alt={movie.title} />
-                      </Link>
-                    </div>
-                    <div>
-                      <Link to={`/review/${movie.movie_id}`}>
-                        <h3>{movie.title}</h3>
-                      </Link>
-                      <p className="synopsis">{movie.synopsis}</p>
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
-          );
+          return <ul className="movie-list">
+            {this.state.movies.map(movie => {
+              return <li key={movie.movie_id}>
+                <div className="movie-poster"><Link to={`/review/${movie.movie_id}`}><img src={movie.image_url} alt={movie.title} /></Link></div>
+                <div>
+                  <Link to={`/review/${movie.movie_id}`}>
+                    <h3>{movie.title.toUpperCase()}</h3>
+                  </Link>
+                  <p className="synopsis">{movie.synopsis}</p>
+                </div>
+              </li>
+            })}
+          </ul>
         }
       }
     };

@@ -81,7 +81,7 @@ function postTweet(request, response) {
     twitter_user_secret,
     postBody,
     '',
-    function(err, data, res) {
+    function (err, data, res) {
       if (err) {
         console.log(err);
       } else {
@@ -178,14 +178,14 @@ function urlBuilder(request) {
   const searchType = request.query.url;
   let url = '';
   switch (searchType) {
-  case 'movies':
-    url = `https://api.themoviedb.org/3/search/movie?api_key=${MOVIE_API_KEY}&query=${searchTarget}`;
-    break;
-  case 'search':
-    url = `https://api.themoviedb.org/3/movie/${searchTarget}?api_key=${MOVIE_API_KEY}&language=en-US`;
-    break;
-  default:
-    url = `https://api.themoviedb.org/3/search/movie?api_key=${MOVIE_API_KEY}&query=${searchTarget}`;
+    case 'movies':
+      url = `https://api.themoviedb.org/3/search/movie?api_key=${MOVIE_API_KEY}&query=${searchTarget}`;
+      break;
+    case 'search':
+      url = `https://api.themoviedb.org/3/movie/${searchTarget}?api_key=${MOVIE_API_KEY}&language=en-US`;
+      break;
+    default:
+      url = `https://api.themoviedb.org/3/search/movie?api_key=${MOVIE_API_KEY}&query=${searchTarget}`;
   }
   return url;
 }
