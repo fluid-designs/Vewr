@@ -25,7 +25,6 @@ export default class Login extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    //console.log('Username: ', this.state.username);
 
     //login routing to connect to backend
     superagent
@@ -48,7 +47,7 @@ export default class Login extends Component {
     return (
       <Fragment>
         <div id="login" className="component-container">
-          <h1>Login</h1>
+          <h1>LOGIN</h1>
 
           <form onSubmit={this.handleSubmit}>
             <div>
@@ -64,7 +63,7 @@ export default class Login extends Component {
             </div>
 
             <div>
-              <button type="submit">Submit</button>
+              <button id="submit-button" type="submit">SUBMIT</button>
             </div>
           </form>
           <p>* If you don't have an account, no worries; upon logging in a new account will be created for you.</p>

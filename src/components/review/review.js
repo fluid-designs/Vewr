@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default class Review extends Component {
+
   notify = () =>
     toast('Thanks for your review!', {
       autoClose: 1500,
@@ -114,6 +115,7 @@ export default class Review extends Component {
       }
     });
   };
+
   render() {
     return (
       <Fragment>
@@ -121,13 +123,14 @@ export default class Review extends Component {
           <section className="movie-info">
             <div className="movie-poster">
               <img
+                id="movie-poster-image"
                 src={this.state.movie.image_url}
                 alt={this.state.movie.title}
               />
             </div>
             <div>
-              <h1>{this.state.movie.title}</h1>
-              <h4>{'Movie Synopsis: '.toUpperCase()}</h4>
+              <h1 id="movie-title">{this.state.movie.title}</h1>
+              <h4 id="synopsis-header">{"Movie Synopsis: ".toUpperCase()}</h4>
               <p id="synopsis">{this.state.movie.synopsis}</p>
             </div>
           </section>
