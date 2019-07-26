@@ -80,24 +80,23 @@ export default class Dashboard extends Component {
     return parseInt(review.recommended) === 1 ? (
       <i className="far fa-thumbs-up" />
     ) : (
-      <i className="fas fa-thumbs-down" />
-    );
+        <i className="fas fa-thumbs-down" />
+      );
   };
 
   handleTweet = (event, movieReview) => {
     event.preventDefault();
-    let tweetBody = `Created On:${movieReview.created_on}
+    let tweetBody =
+      `Created On:${movieReview.created_on}
     Movie Title: ${movieReview.title}
     Rating:${movieReview.rating}
     Recommended:${movieReview.recommended}
     Review:${movieReview.review}`;
 
-    superagent
-      .post('/tweet')
+    superagent.post("/tweet")
       .set('Content-Type', 'application/json')
       .send({ review: tweetBody })
       .then(res => {
-        console.log(res.body);
         if (!res.body.err) {
           toast('Tweet has been sent!', { autoClose: 2000, position: "top-center" });
           return;
@@ -230,21 +229,20 @@ export default class Dashboard extends Component {
               </Tabs>
             </div>
 
-            <form onSubmit={this.handleSubmit}>
-              <input
-                type="text"
-                name="query"
-                value={this.state.query}
-                placeholder="Search for a movie"
-                onChange={this.handleChange}
-                required
-              />
-              <button type="submit">
-                <i className="fas fa-search" />
-              </button>
-            </form>
-          </div>
-        );
+          <form onSubmit={this.handleSubmit}>
+            <input
+              type="text"
+              name="query"
+              value={this.state.query}
+              placeholder="Search for a movie"
+              onChange={this.handleChange}
+              required
+            />
+            <button type="submit">
+              <i className="fas fa-search" />
+            </button>
+          </form>
+        </div>
       }
     };
 

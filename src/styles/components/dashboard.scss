@@ -52,12 +52,18 @@
 
   // Individual movie objects.
   #react-tabtab-panel-0 > ul > li, #react-tabtab-panel-1 > ul > li {
-    // border: $primary-border-color 1px solid;
     background-color: $quaternary-background-color;
   }
 
   #react-tabtab-panel-0, #react-tabtab-panel-1 {
     background-color: $primary-accent-color;
+  }
+
+  // Rare occasion in mobile view where the package creates white space to the sides of the tabs.
+  #react-tab > div > div > div > div > div {
+    border: none;
+    background-color: transparent;
+    color: transparent;
   }
 
   form {
