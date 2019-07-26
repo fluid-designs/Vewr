@@ -90,7 +90,7 @@ nav > ul > a {
 
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-  background: $secondary-background-color;
+  background: $tertiary-background-color;
 }
 
 /* Position and sizing of clickable cross button */
@@ -99,9 +99,9 @@ nav > ul > a {
   width: 24px;
 }
 
-/* Color/shape of close button cross */
+/* Color/shape of close button cross(x-button) */
 .bm-cross {
-  background: #bdc3c7;
+  background: $primary-text-color;
 }
 
 /* General sidebar styles */
@@ -117,8 +117,10 @@ nav > ul > a {
 }
 
 /* Wrapper for item list */
-.bm-item-list {
-  color: #b8b7ad;
+nav.bm-item-list {
+  color: $primary-text-color;
+  width: 100% !important;
+  left: 0 !important;
 }
 
 /* Styling of overlay */

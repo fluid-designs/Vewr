@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 export default class Review extends Component {
 
-  notify = () => toast("Thanks for your review!", {autoClose: 1500, position: "top-center"})
+  notify = () => toast("Thanks for your review!", { autoClose: 1500, position: "top-center" })
 
   constructor(props) {
     super(props);
@@ -22,7 +22,7 @@ export default class Review extends Component {
       redirect: false
     };
   }
-  
+
   componentDidMount() {
     // Make a http get request using superagent
     // Save response into state as movie object
@@ -77,15 +77,14 @@ export default class Review extends Component {
         rating: this.state.rating,
         recommended: this.state.recommended
       }
-      
+
     };
-    console.log('data', data);
     superagent
       .post('/review')
       .set('Content-Type', 'application/json')
       .send(data)
       .then(result => {
-        setTimeout(()=>{
+        setTimeout(() => {
           this.props.history.push('/dashboard');
         }, 1500)
       })
@@ -113,20 +112,22 @@ export default class Review extends Component {
       }
     });
   };
+
   render() {
     return (
-      
+
       <Fragment>
         <div id="Review" className="component-container">
           <section className="movie-info">
             <div className="movie-poster">
               <img
+                id="movie-poster-image"
                 src={this.state.movie.image_url}
                 alt={this.state.movie.title} />
             </div>
             <div>
-              <h1>{this.state.movie.title}</h1>
-              <h4>{"Movie Synopsis: ".toUpperCase()}</h4>
+              <h1 id="movie-title">{this.state.movie.title}</h1>
+              <h4 id="synopsis-header">{"Movie Synopsis: ".toUpperCase()}</h4>
               <p id="synopsis">{this.state.movie.synopsis}</p>
             </div>
           </section>
@@ -170,7 +171,7 @@ export default class Review extends Component {
               <option value="9">9</option>
               <option value="10">10</option>
             </select><br /><br />
-            
+
             <button type="submit" >Save your review</button>
             <ToastContainer />
           </form>

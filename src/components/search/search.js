@@ -1,13 +1,12 @@
 import React, { Fragment, Component } from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import superagent from "superagent";
 
 require('dotenv').config()
 
-export default class Search extends Component{
+export default class Search extends Component {
   constructor(props) {
     super(props);
-    //console.log(this.props.match.params.query)
     this.state = {
       query: this.props.match.params.query,
       movies: [],
@@ -15,17 +14,16 @@ export default class Search extends Component{
     };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     // make request off of query parameter being passed from dashboard.js
     superagent
       .get('/movies')
       .query({
-        data: this.state.query, 
+        data: this.state.query,
         url: 'movies'
       })
       .then(result => {
-        console.log(result.body);
-         this.setState({
+        this.setState({
           movies: result.body,
           promiseIsResolved: true
         })
@@ -35,7 +33,7 @@ export default class Search extends Component{
       })
   }
 
-  render(){
+  render() {
 
     const waitForAsync = () => {
       if (!this.state.promiseIsResolved) {
@@ -48,18 +46,18 @@ export default class Search extends Component{
               Please Try again.
             </Link>
           </div>
-          
+
         } else {
           return <ul className="movie-list">
             {this.state.movies.map(movie => {
               return <li key={movie.movie_id}>
-              <div className="movie-poster"><Link to={`/review/${movie.movie_id}`}><img src={movie.image_url} alt={movie.title} /></Link></div>
-              <div>
-                <Link to={`/review/${movie.movie_id}`}>
-                  <h3>{movie.title}</h3>
-                </Link>
-                <p className="synopsis">{movie.synopsis}</p>
-              </div>
+                <div className="movie-poster"><Link to={`/review/${movie.movie_id}`}><img src={movie.image_url} alt={movie.title} /></Link></div>
+                <div>
+                  <Link to={`/review/${movie.movie_id}`}>
+                    <h3>{movie.title.toUpperCase()}</h3>
+                  </Link>
+                  <p className="synopsis">{movie.synopsis}</p>
+                </div>
               </li>
             })}
           </ul>

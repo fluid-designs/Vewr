@@ -1,4 +1,4 @@
-$form-border-radius: 3px;
+$form-border-radius: .2em;
 
 form{
 	font: $body-font-stack;
@@ -21,12 +21,13 @@ form select
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
-	border-radius: $form-border-radius;
-	background: #fff;
+  font-size: 1em;
+	color: $primary-text-color;
+  background-color: $tertiary-background-color;
 	margin-bottom: 10px;
-	border: 1px solid #ccc;
+  border: $secondary-border-color 2px solid;
+	border-radius: $form-border-radius;
 	padding: 10px;
-	color: #555;
 	font: $body-font-stack;
 }
 form input[type="text"]:focus,
@@ -51,7 +52,7 @@ form input[type="button"], button{
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	padding: 10px;
-	background: $secondary-accent-color;
+	background: $quaternary-background-color;
 	border-bottom: 2px solid $primary-color;
 	border-top-style: none;
 	border-right-style: none;
@@ -62,7 +63,7 @@ form input[type="button"], button{
 }
 form input[type="submit"]:hover,
 form input[type="button"]:hover, button:hover{
-	background: #2EBC99;
+	background: $tertiary-background-color;
 }
 select{
 	-webkit-appearance: menulist-button;
