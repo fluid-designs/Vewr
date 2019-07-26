@@ -242,7 +242,7 @@ export default class Dashboard extends Component {
               <i className="fas fa-search" />
             </button>
           </form>
-        </div>
+        </div>)
       }
     };
 
