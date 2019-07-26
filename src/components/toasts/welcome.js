@@ -4,7 +4,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 export default class WelcomeToast extends Component {
-
   notify = () => {
     if (this.props.newUser){
       toast('Welcome! A new user account has been created for you.', { autoClose: 2000, position: "top-center" });
@@ -14,9 +13,7 @@ export default class WelcomeToast extends Component {
   }
 
   render(){
-    
     return (
-      
       <Fragment>
         {this.notify()}
         <ToastContainer />

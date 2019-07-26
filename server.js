@@ -41,6 +41,7 @@ app.get('/login', getUser);
 app.get('/suggestions', getSuggestions);
 app.get('/reviews', getUserReviews);
 app.post('/tweet', postTweet);
+app.delete('/review', deleteUserReview);
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
@@ -84,9 +85,9 @@ function postTweet(request, response) {
     function (err, data, res) {
       if (err) {
         console.log(err);
-      } else {
-        response.status(200).send('Successful Tweet!');
       }
+
+      return response.send({err});
     }
   );
 }
@@ -161,7 +162,7 @@ function getMovieAPIResults(request, response) {
 
 //Grabs user reviews to display on Dashboard
 function getUserReviews(request, response) {
-  const userReviewLookupSQL = `SELECT * FROM reviews INNER JOIN movies ON reviews.movie_id = movies.id WHERE reviews.user_id = $1`;
+  const userReviewLookupSQL = `SELECT * FROM reviews INNER JOIN movies ON reviews.movie_id = movies.id WHERE reviews.user_id = $1 ORDER BY reviews.created_on DESC`;
   const userReviewLookupValues = [parseInt(request.query.data)];
 
   client
@@ -256,6 +257,29 @@ function getUser(request, response) {
       } else {
         response.send([res.rows[0], false]);
       }
+    })
+    .catch(e => console.error(e.stack));
+}
+
+function deleteUserReview(request, response) {
+  const userId = parseInt(request.query.userId);
+  const movieId = parseInt(request.query.movieId);
+
+  const deleteReviewSQL = `DELETE FROM reviews WHERE reviews.movie_id = $1 AND reviews.user_id = $2`;
+  const deleteReviewValues = [movieId, userId];
+
+  client
+    .query(deleteReviewSQL, deleteReviewValues)
+    .then(res => {
+      const userReviewLookupSQL = `SELECT * FROM reviews INNER JOIN movies ON reviews.movie_id = movies.id WHERE reviews.user_id = $1 ORDER BY reviews.created_on DESC`;
+      const userReviewLookupValues = [userId];
+    
+      client
+        .query(userReviewLookupSQL, userReviewLookupValues)
+        .then(res => {
+          response.send(res.rows);
+        })
+        .catch(e => console.error(e.stack));
     })
     .catch(e => console.error(e.stack));
 }
