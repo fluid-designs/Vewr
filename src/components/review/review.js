@@ -1,11 +1,14 @@
 import React, { Fragment, Component } from 'react';
 import superagent from 'superagent';
 import { ToastContainer, toast } from 'react-toastify';
-
+import 'react-toastify/dist/ReactToastify.css';
 
 export default class Review extends Component {
-
-  notify = () => toast("Thanks for your review!", {autoClose: 1500, position: "top-center"})
+  notify = () =>
+    toast('Thanks for your review!', {
+      autoClose: 1500,
+      position: 'top-center'
+    });
 
   constructor(props) {
     super(props);
@@ -16,13 +19,13 @@ export default class Review extends Component {
       rating: 1,
       recommended: '',
       active: {
-        like: "",
-        dislike: ""
+        like: '',
+        dislike: ''
       },
       redirect: false
     };
   }
-  
+
   componentDidMount() {
     // Make a http get request using superagent
     // Save response into state as movie object
@@ -77,17 +80,15 @@ export default class Review extends Component {
         rating: this.state.rating,
         recommended: this.state.recommended
       }
-      
     };
-    console.log('data', data);
     superagent
       .post('/review')
       .set('Content-Type', 'application/json')
       .send(data)
       .then(result => {
-        setTimeout(()=>{
+        setTimeout(() => {
           this.props.history.push('/dashboard/1');
-        }, 1500)
+        }, 1500);
       })
       .catch(err => {
         console.error(err);
@@ -98,8 +99,8 @@ export default class Review extends Component {
     this.setState({
       recommended: 1,
       active: {
-        like: "active",
-        dislike: ""
+        like: 'active',
+        dislike: ''
       }
     });
   };
@@ -108,25 +109,25 @@ export default class Review extends Component {
     this.setState({
       recommended: 0,
       active: {
-        like: "",
-        dislike: "active"
+        like: '',
+        dislike: 'active'
       }
     });
   };
   render() {
     return (
-      
       <Fragment>
         <div id="Review" className="component-container">
           <section className="movie-info">
             <div className="movie-poster">
               <img
                 src={this.state.movie.image_url}
-                alt={this.state.movie.title} />
+                alt={this.state.movie.title}
+              />
             </div>
             <div>
               <h1>{this.state.movie.title}</h1>
-              <h4>{"Movie Synopsis: ".toUpperCase()}</h4>
+              <h4>{'Movie Synopsis: '.toUpperCase()}</h4>
               <p id="synopsis">{this.state.movie.synopsis}</p>
             </div>
           </section>
@@ -146,11 +147,23 @@ export default class Review extends Component {
               <div className="rating">
                 {/* <!-- Thumbs up --> */}
                 <div className="like grow">
-                  <i onClick={this.thumbsUp} className={`fa fa-thumbs-up fa-3x like ${this.state.active.like}`} aria-hidden="true"></i>
+                  <i
+                    onClick={this.thumbsUp}
+                    className={`fa fa-thumbs-up fa-3x like ${
+                      this.state.active.like
+                    }`}
+                    aria-hidden="true"
+                  />
                 </div>
                 {/* <!-- Thumbs down --> */}
                 <div className="dislike grow">
-                  <i onClick={this.thumbsDown} className={`fa fa-thumbs-down fa-3x like ${this.state.active.dislike}`} aria-hidden="true"></i>
+                  <i
+                    onClick={this.thumbsDown}
+                    className={`fa fa-thumbs-down fa-3x like ${
+                      this.state.active.dislike
+                    }`}
+                    aria-hidden="true"
+                  />
                 </div>
               </div>
             </div>
@@ -169,9 +182,11 @@ export default class Review extends Component {
               <option value="8">8</option>
               <option value="9">9</option>
               <option value="10">10</option>
-            </select><br /><br />
-            
-            <button type="submit" >Save your review</button>
+            </select>
+            <br />
+            <br />
+
+            <button type="submit">Save your review</button>
             <ToastContainer />
           </form>
         </div>

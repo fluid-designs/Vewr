@@ -2,9 +2,7 @@ import React, { Fragment, Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Tabs, TabList, Tab, PanelList, Panel } from 'react-tabtab';
 import * as customStyle from 'react-tabtab/lib/themes/bootstrap';
-import Welcome from '../toasts/welcome.js';
 import superagent from 'superagent';
-
 
 export default class Dashboard extends Component {
   constructor(props) {
@@ -13,15 +11,13 @@ export default class Dashboard extends Component {
     this.state = {
       userId: null,
       userName: '',
-      newUser:'',
+      newUser: '',
       query: '',
       activeIndex: 0,
       suggested: [],
       reviewedMovies: [],
       promiseIsResolved: false
     };
-
-    console.log(this.props)
   }
 
   // first function that is called what page is loaded
@@ -76,7 +72,6 @@ export default class Dashboard extends Component {
   };
 
   handleRecommended = review => {
-    //console.log(review);
     return parseInt(review.recommended) === 1 ? (
       <i className="far fa-thumbs-up" />
     ) : (
@@ -86,23 +81,22 @@ export default class Dashboard extends Component {
 
   handleTweet = (event, movieReview) => {
     event.preventDefault();
-    console.log('movieReview: ', movieReview);
-    let tweetBody =
-    `Created On:${movieReview.created_on}
+    let tweetBody = `Created On:${movieReview.created_on}
     Movie Title: ${movieReview.title}
     Rating:${movieReview.rating}
     Recommended:${movieReview.recommended}
     Review:${movieReview.review}`;
 
-    superagent.post("/tweet")
-    .set('Content-Type', 'application/json')
-    .send({review: tweetBody})
-    .then(res => {
-      console.log(res)
-    })
-    .catch(err => {
-      console.error(err);
-    })
+    superagent
+      .post('/tweet')
+      .set('Content-Type', 'application/json')
+      .send({ review: tweetBody })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.error(err);
+      });
   };
 
   render() {
@@ -110,103 +104,119 @@ export default class Dashboard extends Component {
       if (!this.state.promiseIsResolved) {
         return null;
       } else {
-        return <div id="dashboard" className="component-container">
-        <img
-          className="profile-pic"
-          src={`https://avatars.dicebear.com/v2/bottts/${
-            this.state.userId
-          }.svg`}
-          alt="Profile"
-        />
-        <h1>{`Welcome, ${this.state.userName}!!`}</h1>
+        return (
+          <div id="dashboard" className="component-container">
+            <img
+              className="profile-pic"
+              src={`https://avatars.dicebear.com/v2/bottts/${
+                this.state.userId
+              }.svg`}
+              alt="Profile"
+            />
+            <h1>{`Welcome, ${this.state.userName}!!`}</h1>
 
-        <div id="react-tab">
-          <Tabs
-            customStyle={customStyle}
-            activeIndex={this.state.activeIndex}
-            onTabChange={this.handleTabChange}
-          >
-            <TabList className="tab-list">
-              <Tab>
-                <i className="far fa-thumbs-up" /> Suggestions
-              </Tab>
-              <Tab>
-                <i className="fas fa-film" /> Reviewed Movies
-              </Tab>
-            </TabList>
-            <PanelList className="panel-list">
-              <Panel>
-                <h2>Suggested Movies</h2>
-                <ul className="suggested-list">
-                  {this.state.suggested.map(movie => {
-                    return (
-                      <li key={movie.movie_id}>
-                        <div className="movie-poster">
-                          <Link to={`/review/${movie.movie_id}`}>
-                            <img src={movie.image_url} alt={movie.title} />
-                          </Link>
-                        </div>
-                        <div>
-                          <Link to={`/review/${movie.movie_id}`}>
-                            <h3>{movie.title}</h3>
-                          </Link>
-                          <p className="synopsis">{movie.synopsis}</p>
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </Panel>
-              <Panel>
-                <h2>Reviewed Movies</h2>
-                <ul className="movie-list">
-                  {this.state.reviewedMovies.map(review => {
-                    return <li key={review.id}>
-                      <div className="review-poster">
-                        <Link to={`/review/${review.movie_id}`}>
-                          <img src={review.image_url} alt={review.title} />
-                        </Link>
-                      </div>
-                      <div>
-                        <Link to={`/review/${review.movie_id}`}>
-                          <h3>{review.title.toUpperCase()}</h3>
-                        </Link>
-                        <p>Review: {review.review}</p>
-                        <p>Rating: {review.rating}</p>
-                        <p>Recommend: {this.handleRecommended(review)}</p>
-                        <span>Created: {review.created_on} <a href="" onClick={(event) => this.handleTweet(event, review)}>
-                            <i onClick={(event) => this.handleTweet(event, review)} className="fab fa-twitter"></i>
-                          </a></span>
-                      </div>
-                    </li>
-                  })}
-                </ul>
-              </Panel>
-            </PanelList>
-          </Tabs>
-        </div>
+            <div id="react-tab">
+              <Tabs
+                customStyle={customStyle}
+                activeIndex={this.state.activeIndex}
+                onTabChange={this.handleTabChange}
+              >
+                <TabList className="tab-list">
+                  <Tab>
+                    <i className="far fa-thumbs-up" /> Suggestions
+                  </Tab>
+                  <Tab>
+                    <i className="fas fa-film" /> Reviewed Movies
+                  </Tab>
+                </TabList>
+                <PanelList className="panel-list">
+                  <Panel>
+                    <h2>Suggested Movies</h2>
+                    <ul className="suggested-list">
+                      {this.state.suggested.map(movie => {
+                        return (
+                          <li key={movie.movie_id}>
+                            <div className="movie-poster">
+                              <Link to={`/review/${movie.movie_id}`}>
+                                <img src={movie.image_url} alt={movie.title} />
+                              </Link>
+                            </div>
+                            <div>
+                              <Link to={`/review/${movie.movie_id}`}>
+                                <h3>{movie.title}</h3>
+                              </Link>
+                              <p className="synopsis">{movie.synopsis}</p>
+                            </div>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </Panel>
+                  <Panel>
+                    <h2>Reviewed Movies</h2>
+                    <ul className="movie-list">
+                      {this.state.reviewedMovies.map(review => {
+                        return (
+                          <li key={review.id}>
+                            <div className="review-poster">
+                              <Link to={`/review/${review.movie_id}`}>
+                                <img
+                                  src={review.image_url}
+                                  alt={review.title}
+                                />
+                              </Link>
+                            </div>
+                            <div>
+                              <Link to={`/review/${review.movie_id}`}>
+                                <h3>{review.title.toUpperCase()}</h3>
+                              </Link>
+                              <p>Review: {review.review}</p>
+                              <p>Rating: {review.rating}</p>
+                              <p>Recommend: {this.handleRecommended(review)}</p>
+                              <span>
+                                Created: {review.created_on}{' '}
+                                <a
+                                  href=""
+                                  onClick={event =>
+                                    this.handleTweet(event, review)
+                                  }
+                                >
+                                  <i
+                                    onClick={event =>
+                                      this.handleTweet(event, review)
+                                    }
+                                    className="fab fa-twitter"
+                                  />
+                                </a>
+                              </span>
+                            </div>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </Panel>
+                </PanelList>
+              </Tabs>
+            </div>
 
-        <form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            name="query"
-            value={this.state.query}
-            placeholder="Search for a movie"
-            onChange={this.handleChange}
-            required
-          />
-          <button type="submit">
-            <i className="fas fa-search" />
-          </button>
-        </form>
-      </div>
+            <form onSubmit={this.handleSubmit}>
+              <input
+                type="text"
+                name="query"
+                value={this.state.query}
+                placeholder="Search for a movie"
+                onChange={this.handleChange}
+                required
+              />
+              <button type="submit">
+                <i className="fas fa-search" />
+              </button>
+            </form>
+          </div>
+        );
       }
-    }
+    };
 
-    return (
-      <Fragment>
-        {waitForAsync()}
-      </Fragment>
-    );
+    return <Fragment>{waitForAsync()}</Fragment>;
   }
 }
