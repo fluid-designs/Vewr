@@ -1,11 +1,15 @@
 import React, { Fragment, Component } from 'react';
 import superagent from 'superagent';
 import { ToastContainer, toast } from 'react-toastify';
-
+import 'react-toastify/dist/ReactToastify.css';
 
 export default class Review extends Component {
 
-  notify = () => toast("Thanks for your review!", { autoClose: 1500, position: "top-center" })
+  notify = () =>
+    toast('Thanks for your review!', {
+      autoClose: 1500,
+      position: 'top-center'
+    });
 
   constructor(props) {
     super(props);
@@ -16,8 +20,8 @@ export default class Review extends Component {
       rating: 1,
       recommended: '',
       active: {
-        like: "",
-        dislike: ""
+        like: '',
+        dislike: ''
       },
       redirect: false
     };
@@ -77,7 +81,6 @@ export default class Review extends Component {
         rating: this.state.rating,
         recommended: this.state.recommended
       }
-
     };
     superagent
       .post('/review')
@@ -85,8 +88,8 @@ export default class Review extends Component {
       .send(data)
       .then(result => {
         setTimeout(() => {
-          this.props.history.push('/dashboard');
-        }, 1500)
+          this.props.history.push('/dashboard/1');
+        }, 1500);
       })
       .catch(err => {
         console.error(err);
@@ -97,8 +100,8 @@ export default class Review extends Component {
     this.setState({
       recommended: 1,
       active: {
-        like: "active",
-        dislike: ""
+        like: 'active',
+        dislike: ''
       }
     });
   };
@@ -107,15 +110,14 @@ export default class Review extends Component {
     this.setState({
       recommended: 0,
       active: {
-        like: "",
-        dislike: "active"
+        like: '',
+        dislike: 'active'
       }
     });
   };
 
   render() {
     return (
-
       <Fragment>
         <div id="Review" className="component-container">
           <section className="movie-info">
@@ -123,7 +125,8 @@ export default class Review extends Component {
               <img
                 id="movie-poster-image"
                 src={this.state.movie.image_url}
-                alt={this.state.movie.title} />
+                alt={this.state.movie.title}
+              />
             </div>
             <div>
               <h1 id="movie-title">{this.state.movie.title}</h1>
@@ -147,11 +150,23 @@ export default class Review extends Component {
               <div className="rating">
                 {/* <!-- Thumbs up --> */}
                 <div className="like grow">
-                  <i onClick={this.thumbsUp} className={`fa fa-thumbs-up fa-3x like ${this.state.active.like}`} aria-hidden="true"></i>
+                  <i
+                    onClick={this.thumbsUp}
+                    className={`fa fa-thumbs-up fa-3x like ${
+                      this.state.active.like
+                    }`}
+                    aria-hidden="true"
+                  />
                 </div>
                 {/* <!-- Thumbs down --> */}
                 <div className="dislike grow">
-                  <i onClick={this.thumbsDown} className={`fa fa-thumbs-down fa-3x like ${this.state.active.dislike}`} aria-hidden="true"></i>
+                  <i
+                    onClick={this.thumbsDown}
+                    className={`fa fa-thumbs-down fa-3x like ${
+                      this.state.active.dislike
+                    }`}
+                    aria-hidden="true"
+                  />
                 </div>
               </div>
             </div>
@@ -170,9 +185,11 @@ export default class Review extends Component {
               <option value="8">8</option>
               <option value="9">9</option>
               <option value="10">10</option>
-            </select><br /><br />
+            </select>
+            <br />
+            <br />
 
-            <button type="submit" >Save your review</button>
+            <button type="submit">Save your review</button>
             <ToastContainer />
           </form>
         </div>

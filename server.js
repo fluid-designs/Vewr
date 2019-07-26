@@ -53,10 +53,10 @@ app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 // https://gist.github.com/jaredpalmer/138f17a142d2d8770a1d752b0e00bd31
 function postTweet(request, response) {
-  var twitter_application_consumer_key = process.env.TWITTER_API_KEY;  // API Key
-  var twitter_application_secret = process.env.TWITTER_API_SECRET;  // API Secret
-  var twitter_user_access_token = process.env.TWITTER_ACCESS_TOKEN;  // Access Token
-  var twitter_user_secret = process.env.TWITTER_ACCESS_TOKEN_SECRET;  // Access Token Secret
+  var twitter_application_consumer_key = process.env.TWITTER_API_KEY; // API Key
+  var twitter_application_secret = process.env.TWITTER_API_SECRET; // API Secret
+  var twitter_user_access_token = process.env.TWITTER_ACCESS_TOKEN; // Access Token
+  var twitter_user_secret = process.env.TWITTER_ACCESS_TOKEN_SECRET; // Access Token Secret
 
   var oauth = new OAuth.OAuth(
     'https://api.twitter.com/oauth/request_token',
@@ -72,10 +72,11 @@ function postTweet(request, response) {
   var status = request.body.review;
 
   var postBody = {
-    'status': status
+    status: status
   };
 
-  oauth.post('https://api.twitter.com/1.1/statuses/update.json',
+  oauth.post(
+    'https://api.twitter.com/1.1/statuses/update.json',
     twitter_user_access_token,
     twitter_user_secret,
     postBody,
@@ -86,7 +87,8 @@ function postTweet(request, response) {
       } else {
         response.status(200).send('Successful Tweet!');
       }
-    });
+    }
+  );
 }
 
 // format time with AM or PM
@@ -104,7 +106,8 @@ function formatAMPM(date) {
 // Get the current date and time
 function getCurrentDateTime() {
   let today = new Date();
-  let date = `${(today.getMonth() + 1)}/${today.getDate()}/${today.getFullYear()}`;
+  let date = `${today.getMonth() +
+    1}/${today.getDate()}/${today.getFullYear()}`;
 
   return `${date} ${formatAMPM(today)}`;
 }

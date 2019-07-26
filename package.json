@@ -44,7 +44,7 @@
       "last 1 safari version"
     ]
   },
-  "description": "A simple web application that allows users to view and review their favorite movies & TV Shows.",
+  "description": "A simple web application that allows users to view and review their favorite movies",
   "main": "server.js",
   "devDependencies": {
     "nodemon": "^1.19.1"
@@ -58,6 +58,5 @@
   "bugs": {
     "url": "https://github.com/fluid-designs/Vewr/issues"
   },
-  "homepage": "https://github.com/fluid-designs/Vewr#readme",
   "proxy": "http://localhost:5000"
 }

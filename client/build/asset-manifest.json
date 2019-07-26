@@ -1,15 +1,17 @@
 {
   "files": {
-    "main.css": "/fluid-designs/Vewr/static/css/main.438fa7e7.chunk.css",
-    "main.js": "/fluid-designs/Vewr/static/js/main.c1a26648.chunk.js",
-    "main.js.map": "/fluid-designs/Vewr/static/js/main.c1a26648.chunk.js.map",
-    "runtime~main.js": "/fluid-designs/Vewr/static/js/runtime~main.1fab7456.js",
-    "runtime~main.js.map": "/fluid-designs/Vewr/static/js/runtime~main.1fab7456.js.map",
-    "static/js/2.3c68ad63.chunk.js": "/fluid-designs/Vewr/static/js/2.3c68ad63.chunk.js",
-    "static/js/2.3c68ad63.chunk.js.map": "/fluid-designs/Vewr/static/js/2.3c68ad63.chunk.js.map",
-    "index.html": "/fluid-designs/Vewr/index.html",
-    "precache-manifest.1a4aee1c89602f41427b8c3101e52262.js": "/fluid-designs/Vewr/precache-manifest.1a4aee1c89602f41427b8c3101e52262.js",
-    "service-worker.js": "/fluid-designs/Vewr/service-worker.js",
-    "static/css/main.438fa7e7.chunk.css.map": "/fluid-designs/Vewr/static/css/main.438fa7e7.chunk.css.map"
+    "main.css": "/static/css/main.51606ae6.chunk.css",
+    "main.js": "/static/js/main.2fe9517b.chunk.js",
+    "main.js.map": "/static/js/main.2fe9517b.chunk.js.map",
+    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
+    "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
+    "static/css/2.39017165.chunk.css": "/static/css/2.39017165.chunk.css",
+    "static/js/2.bc133db1.chunk.js": "/static/js/2.bc133db1.chunk.js",
+    "static/js/2.bc133db1.chunk.js.map": "/static/js/2.bc133db1.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.4d9a47cd8f1e4f4e4ae0e24fee425292.js": "/precache-manifest.4d9a47cd8f1e4f4e4ae0e24fee425292.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.39017165.chunk.css.map": "/static/css/2.39017165.chunk.css.map",
+    "static/css/main.51606ae6.chunk.css.map": "/static/css/main.51606ae6.chunk.css.map"
   }
 }

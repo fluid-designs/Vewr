@@ -1,8 +1,9 @@
+
 import React, { Fragment, Component } from "react";
 import { Link } from "react-router-dom";
 import superagent from "superagent";
 
-require('dotenv').config()
+require('dotenv').config();
 
 export default class Search extends Component {
   constructor(props) {
@@ -26,15 +27,14 @@ export default class Search extends Component {
         this.setState({
           movies: result.body,
           promiseIsResolved: true
-        })
+        });
       })
       .catch(err => {
-        console.error(err)
-      })
+        console.error(err);
+      });
   }
 
   render() {
-
     const waitForAsync = () => {
       if (!this.state.promiseIsResolved) {
         return null;
@@ -63,7 +63,7 @@ export default class Search extends Component {
           </ul>
         }
       }
-    }
+    };
 
     return (
       <Fragment>
@@ -75,4 +75,3 @@ export default class Search extends Component {
     );
   }
 }
-
