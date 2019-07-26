@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { Tabs, TabList, Tab, PanelList, Panel } from 'react-tabtab';
 import * as customStyle from 'react-tabtab/lib/themes/bootstrap';
 import superagent from 'superagent';
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 export default class Dashboard extends Component {
   constructor(props) {
@@ -16,6 +19,7 @@ export default class Dashboard extends Component {
       activeIndex: 0,
       suggested: [],
       reviewedMovies: [],
+      delete: false,
       promiseIsResolved: false
     };
   }
@@ -25,6 +29,7 @@ export default class Dashboard extends Component {
   // Gets suggestions data from server
   async componentDidMount() {
     if (localStorage.getItem('userId')) {
+      
       const userId = JSON.parse(localStorage.getItem('userId'));
       try {
         const suggestions = await superagent.get('/suggestions');
@@ -92,12 +97,39 @@ export default class Dashboard extends Component {
       .set('Content-Type', 'application/json')
       .send({ review: tweetBody })
       .then(res => {
-        console.log(res);
+        console.log(res.body);
+        if (!res.body.err) {
+          toast('Tweet has been sent!', { autoClose: 2000, position: "top-center" });
+          return;
+        } else {
+          toast(`Tweet has already been sent.`, { autoClose: 2000, position: "top-center" });
+          return;
+        }
+        
+      })
+      .catch(err => {
+        console.error('ERR: ', err);
+      });
+  };
+
+  handleDelete = (event, movieId) => {
+    event.preventDefault();
+    const userId = JSON.parse(localStorage.getItem('userId'));
+
+    toast('Movie review has been deleted!', { autoClose: 2000, position: "top-center" });
+
+    superagent
+      .delete('/review')
+      .query({ userId, movieId})
+      .then(res => {
+        this.setState({ 
+          reviewedMovies: res.body
+        });
       })
       .catch(err => {
         console.error(err);
       });
-  };
+  }
 
   render() {
     const waitForAsync = () => {
@@ -106,6 +138,7 @@ export default class Dashboard extends Component {
       } else {
         return (
           <div id="dashboard" className="component-container">
+            <ToastContainer />         
             <img
               className="profile-pic"
               src={`https://avatars.dicebear.com/v2/bottts/${
@@ -126,12 +159,13 @@ export default class Dashboard extends Component {
                     <i className="far fa-thumbs-up" /> Suggestions
                   </Tab>
                   <Tab>
-                    <i className="fas fa-film" /> Reviewed Movies
+                    <i className="fas fa-film" /> Reviews
                   </Tab>
                 </TabList>
                 <PanelList className="panel-list">
                   <Panel>
-                    <h2>Suggested Movies</h2>
+                    <h1>Suggested Movies</h1>
+                    <h2>List of popular movies for you to review.</h2>
                     <ul className="suggested-list">
                       {this.state.suggested.map(movie => {
                         return (
@@ -153,7 +187,8 @@ export default class Dashboard extends Component {
                     </ul>
                   </Panel>
                   <Panel>
-                    <h2>Reviewed Movies</h2>
+                    <h1>Reviewed Movies</h1>
+                    <h2>List of all the movies you have reviewed.</h2>
                     <ul className="movie-list">
                       {this.state.reviewedMovies.map(review => {
                         return (
@@ -166,7 +201,7 @@ export default class Dashboard extends Component {
                                 />
                               </Link>
                             </div>
-                            <div>
+                            <div className="review-details">
                               <Link to={`/review/${review.movie_id}`}>
                                 <h3>{review.title.toUpperCase()}</h3>
                               </Link>
@@ -175,20 +210,16 @@ export default class Dashboard extends Component {
                               <p>Recommend: {this.handleRecommended(review)}</p>
                               <span>
                                 Created: {review.created_on}{' '}
-                                <a
-                                  href=""
+                                <i
                                   onClick={event =>
                                     this.handleTweet(event, review)
                                   }
-                                >
-                                  <i
-                                    onClick={event =>
-                                      this.handleTweet(event, review)
-                                    }
-                                    className="fab fa-twitter"
-                                  />
-                                </a>
+                                  className="fab fa-twitter"
+                                />
                               </span>
+                            </div>
+                            <div>
+                            <i onClick={(event) => this.handleDelete(event, review.id)} className="far fa-trash-alt"></i>
                             </div>
                           </li>
                         );

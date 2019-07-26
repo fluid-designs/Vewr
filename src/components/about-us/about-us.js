@@ -9,7 +9,6 @@ export default function AboutUs() {
           Fresh as the spring rain. Churning and thrashing as rapids. Swift as
           the stream. Patient as glacial runoff. Cool as the winter snow.
           Amorphous and changeable throughout. We are Fluid Design.
-          #we'rethesmartgroup
         </p>
         <hr />
         <img
@@ -18,8 +17,8 @@ export default function AboutUs() {
         />
         <h2>Jane Hur</h2>
         <p>
-          A spellcaster from the Land of the Winds that trained with the Great
-          Lakes Ancients, she still practices the old ways, hexing code into any
+          A spellcaster born in the Land of the Winds that trained with the Great
+          Lake Ancients, she still practices the old ways, hexing code into any
           shape imaginable and likely the one that most amuses her. Rightly
           feared by the Council of Guardians for the power of her code magic,
           she can bend any code base to her will.
@@ -34,10 +33,7 @@ export default function AboutUs() {
         />
         <h2>Brandon Hurrington</h2>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.{' '}
+          Sellsword. Mercenary. Opportunist. And these are the kind things said of this man with a shrouded past. A person of few words and no attachments, he prefers the periphery of the crowd to best line up an attack on a problem set or offer a scathing observation of algorithmic efficiency. Though he has been involved in all of the greatest coding challenges and hackathons of the last half century he has somehow managed to always escape unscathed.{' '}
         </p>
         <a href="https://github.com/Kai-ros">
           <i className="fab fa-github">Github</i>
@@ -49,10 +45,7 @@ export default function AboutUs() {
         />
         <h2>Melfi Perez</h2>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.{' '}
+          A fallen elven ranger hailing from the Far Coast, though committed to upholding the rule of law her aims may be more nefarious than they seem. Her pinpoint accuracy can land a shot on any bug at ranges that would otherwise seem impossible. Her arcane powers of deployment and configuration are not to be second to none, sadly it would be a vain hope that she uses them for good.{' '}
         </p>
         <a href="https://github.com/perezm27">
           <i className="fab fa-github">Github</i>
@@ -64,10 +57,7 @@ export default function AboutUs() {
         />
         <h2>Matt Stuhring</h2>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.{' '}
+          Durable, boisterous, and dependable, this dwarven berserker is the kindest soul you could ever meet off of the field of development, but when he erupts into a coding furor no logical obstacles can withstand his onslaught. Can frequently be found training late into the night on the perfect stroke of his mighty battle axe, Code Slayer.{' '}
         </p>
         <a href="https://github.com/mattstuhring">
           <i className="fab fa-github">Github</i>
